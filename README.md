@@ -116,7 +116,7 @@ The build output goes to `1.6/Assemblies/`. `deploy.sh` builds the mod and copie
 
 Options: `--vge` (loads VEF + VGE), `--ui` (loads RimHUD, Dubs Mint Menus, Numbers, Animal Tab, Scrollable Inspect Panes), `--perf` (pawn-table benchmark). A run takes 40–130 s and never touches your normal config or saves.
 
-A write-up of the toolchain, patterns and harness used to build this mod, in the form of an agent skill for AI coding tools, is in [](.claude/skills/rimworld-modding/SKILL.md).
+A write-up of the toolchain, patterns and harness used to build this mod, in the form of an agent skill for AI coding tools, is in [`.claude/skills/rimworld-modding`](.claude/skills/rimworld-modding/SKILL.md).
 
 ## Credits
 - **Animal Genetics** by gregorycurrie & Ryan Briscoe, continued by Mlie. This mod depends on it and builds on its gene model.
