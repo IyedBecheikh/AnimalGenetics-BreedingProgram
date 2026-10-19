@@ -106,6 +106,7 @@ public static class PerfBench
         harmony.Patch(AccessTools.Method(typeof(PawnTable), nameof(PawnTable.SetDirty)),
             new HarmonyMethod(typeof(PerfBench), nameof(TableSetDirtyPrefix)));
         DrawProfiler.Patch();
+        HeavyStatPart.AddToAllStats();
 
         // Heavier, realistic case: Animal Genetics' gene columns shown in the Wildlife tab too.
         global::AnimalGenetics.CoreMod.Instance.Settings.showGenesInWildlifeTab = true;
@@ -168,6 +169,8 @@ public static class PerfBench
             guiTicks = 0;
             rebuildTicks = 0;
             rebuilds = 0;
+            HeavyStatPart.Evaluations = 0;
+            PerfFixes_TextCells.Computed = 0;
         }
 
         if (frame < WarmFrames + MeasureFrames)
@@ -189,7 +192,8 @@ public static class PerfBench
 
         report($"[AGBPERF] tab={c.tab,-14} churn={(c.churn ? "yes" : "no "),-3} fix={(c.fix ? "on " : "off")} " +
                $"tab_ms_per_frame={ms,7:F2} rebuilds_per_frame={rebuilds / (float)MeasureFrames:F2} " +
-               $"ms_per_rebuild={perRebuild:F2} animals={rows}");
+               $"ms_per_rebuild={perRebuild:F2} stat_evals_per_frame={HeavyStatPart.Evaluations / (float)MeasureFrames:F0} " +
+               $"text_recomputes_per_frame={PerfFixes_TextCells.Computed / (float)MeasureFrames:F1} animals={rows}");
         NextCase();
     }
 

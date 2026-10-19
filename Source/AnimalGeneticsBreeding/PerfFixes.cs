@@ -59,6 +59,12 @@ public static class PerfFixes
             return false;
         }
 
+        return IsAnimalTableDef(def);
+    }
+
+    /// <summary>The table def is one of the animal tables (see <see cref="IsAnimalTable" />).</summary>
+    public static bool IsAnimalTableDef(PawnTableDef def)
+    {
         if (def == null)
         {
             return false;

@@ -59,12 +59,13 @@ Animal Genetics gives every animal inheritable genes (health, damage, speed, car
 - **Trading:** the VGE genetics trader buys and sells germline samples ("pedigree stock") and serums. Samples are priced by their genes.
 
 ### Performance fix for big herds and modlists
-The Animal Genetics *Genetics* tab, and the vanilla *Wildlife* and *Animals* tabs, could slow the whole game with a few hundred animals. This mod fixes three causes:
+The Animal Genetics *Genetics* tab, and the vanilla *Wildlife* and *Animals* tabs, could slow the whole game with a few hundred animals. This mod fixes four causes:
 - the Genetics tab rebuilt itself on every GUI event;
 - every open animal table rebuilt whenever any pawn spawned or despawned;
-- tables drew row lines for every off-screen row.
+- tables drew row lines for every off-screen row;
+- text columns (meat and leather amount, tame chance, food consumption...) recomputed their stat for every cell on every GUI event. On a big modlist each stat also runs many other mods' stat parts. Inside animal tables each cell's text is now reused for about half a second.
 
-Measured with ~360 animals, drawing is about 3× faster and the constant rebuilds are gone. Works with **Numbers** and **Animal Tab (Continued)**.
+Measured with ~360 animals, drawing is about 3× faster and the constant rebuilds are gone. In Numbers' Wild animals table, stat recomputes drop about 13× and frame time halves. Works with **Numbers** and **Animal Tab (Continued)**.
 
 ## Requirements
 - RimWorld 1.6
