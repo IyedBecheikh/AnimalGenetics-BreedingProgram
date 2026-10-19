@@ -1,0 +1,24 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <!-- Template: test-only harness mod. Output goes next to its About/ folder; the runner copies it into Mods. -->
+  <PropertyGroup>
+    <TargetFramework>net48</TargetFramework>
+    <LangVersion>latest</LangVersion>
+    <AssemblyName>MyModTest</AssemblyName>
+    <OutputPath>..\Assemblies\</OutputPath>
+    <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+    <DebugType>none</DebugType>
+    <ImplicitUsings>disable</ImplicitUsings>
+    <RimWorldDir>C:\Path\To\RimWorld</RimWorldDir>
+    <ManagedDir>$(RimWorldDir)\RimWorldWin64_Data\Managed</ManagedDir>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Assembly-CSharp"><HintPath>$(ManagedDir)\Assembly-CSharp.dll</HintPath><Private>false</Private></Reference>
+    <Reference Include="UnityEngine.CoreModule"><HintPath>$(ManagedDir)\UnityEngine.CoreModule.dll</HintPath><Private>false</Private></Reference>
+    <Reference Include="UnityEngine.IMGUIModule"><HintPath>$(ManagedDir)\UnityEngine.IMGUIModule.dll</HintPath><Private>false</Private></Reference>
+    <Reference Include="UnityEngine.ScreenCaptureModule"><HintPath>$(ManagedDir)\UnityEngine.ScreenCaptureModule.dll</HintPath><Private>false</Private></Reference>
+    <!-- Harmony from the Workshop Harmony mod (2009463077) -->
+    <Reference Include="0Harmony"><HintPath>$(RimWorldDir)\Mods\2009463077\Current\Assemblies\0Harmony.dll</HintPath><Private>false</Private></Reference>
+    <!-- The mod under test (and any mod it builds on) -->
+    <Reference Include="MyMod"><HintPath>..\..\..\1.6\Assemblies\MyMod.dll</HintPath><Private>false</Private></Reference>
+  </ItemGroup>
+</Project>
