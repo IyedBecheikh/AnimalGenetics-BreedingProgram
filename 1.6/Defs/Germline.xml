@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+  <!-- Research -->
+  <ResearchTabDef>
+    <defName>AGB_Breeding</defName>
+    <label>Breeding</label>
+  </ResearchTabDef>
+
+  <ResearchProjectDef>
+    <defName>AGB_GermlineBanking</defName>
+    <label>germline banking</label>
+    <description>Collect germline samples from your best males, keep them viable in a cryobank, and use them to inseminate females, even after the donor is long gone.</description>
+    <baseCost>1000</baseCost>
+    <techLevel>Industrial</techLevel>
+    <tab>AGB_Breeding</tab>
+    <prerequisites>
+      <li>Electricity</li>
+    </prerequisites>
+    <researchViewX>0</researchViewX>
+    <researchViewY>0</researchViewY>
+  </ResearchProjectDef>
+
+  <!-- Item -->
+  <ThingCategoryDef>
+    <defName>AGB_GermlineSamples</defName>
+    <label>germline samples</label>
+    <parent>Manufactured</parent>
+  </ThingCategoryDef>
+
+  <ThingDef ParentName="ResourceBase">
+    <defName>AGB_GermlineSample</defName>
+    <label>germline sample</label>
+    <description>A sealed vial of reproductive cells taken from one specific animal, with that animal's full genetic record. Use it to inseminate a female of the same species.\n\nStays viable for a few days at room temperature. It keeps indefinitely when frozen or stored in a powered cryobank.</description>
+    <thingClass>ThingWithComps</thingClass>
+    <graphicData>
+      <texPath>Things/Item/AGB/GermlineSample</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+    <stackLimit>1</stackLimit>
+    <tickerType>Rare</tickerType>
+    <useHitPoints>true</useHitPoints>
+    <healthAffectsPrice>false</healthAffectsPrice>
+    <statBases>
+      <MaxHitPoints>30</MaxHitPoints>
+      <MarketValue>40</MarketValue>
+      <Mass>0.1</Mass>
+      <Flammability>0.5</Flammability>
+      <DeteriorationRate>0</DeteriorationRate>
+    </statBases>
+    <thingCategories>
+      <li>AGB_GermlineSamples</li>
+    </thingCategories>
+    <tradeability>All</tradeability>
+    <comps>
+      <li Class="AnimalGeneticsBreeding.CompProperties_GermlineSample">
+        <viableDays>3</viableDays>
+      </li>
+    </comps>
+  </ThingDef>
+
+  <!-- Cryobank -->
+  <ThingDef ParentName="BuildingBase">
+    <defName>AGB_Cryobank</defName>
+    <label>cryobank</label>
+    <description>A small powered freezer cabinet for germline samples. Samples stored inside never lose viability while it has power.</description>
+    <thingClass>Building_Storage</thingClass>
+    <graphicData>
+      <texPath>Things/Building/AGB/Cryobank</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <drawSize>(1.25,1.25)</drawSize>
+      <shadowData>
+        <volume>(0.8, 0.5, 0.8)</volume>
+      </shadowData>
+    </graphicData>
+    <uiIconPath>Things/Building/AGB/Cryobank_MenuIcon</uiIconPath>
+    <size>(1,1)</size>
+    <rotatable>false</rotatable>
+    <altitudeLayer>Building</altitudeLayer>
+    <passability>PassThroughOnly</passability>
+    <fillPercent>0.5</fillPercent>
+    <pathCost>50</pathCost>
+    <castEdgeShadows>true</castEdgeShadows>
+    <canOverlapZones>false</canOverlapZones>
+    <surfaceType>Item</surfaceType>
+    <statBases>
+      <MaxHitPoints>150</MaxHitPoints>
+      <WorkToBuild>2000</WorkToBuild>
+      <Mass>30</Mass>
+      <Flammability>0.5</Flammability>
+    </statBases>
+    <costList>
+      <Steel>60</Steel>
+      <ComponentIndustrial>2</ComponentIndustrial>
+    </costList>
+    <building>
+      <preventDeteriorationOnTop>true</preventDeteriorationOnTop>
+      <ignoreStoredThingsBeauty>true</ignoreStoredThingsBeauty>
+      <maxItemsInCell>12</maxItemsInCell>
+      <blueprintClass>Blueprint_Storage</blueprintClass>
+      <fixedStorageSettings>
+        <filter>
+          <thingDefs>
+            <li>AGB_GermlineSample</li>
+          </thingDefs>
+        </filter>
+      </fixedStorageSettings>
+      <defaultStorageSettings>
+        <priority>Important</priority>
+        <filter>
+          <thingDefs>
+            <li>AGB_GermlineSample</li>
+          </thingDefs>
+        </filter>
+      </defaultStorageSettings>
+    </building>
+    <inspectorTabs>
+      <li>ITab_Storage</li>
+    </inspectorTabs>
+    <comps>
+      <li Class="CompProperties_Power">
+        <compClass>CompPowerTrader</compClass>
+        <basePowerConsumption>60</basePowerConsumption>
+      </li>
+      <li Class="CompProperties_Flickable" />
+      <li Class="CompProperties_Breakdownable" />
+      <li Class="AnimalGeneticsBreeding.CompProperties_GeneSplice" />
+    </comps>
+    <designationCategory>Misc</designationCategory>
+    <researchPrerequisites>
+      <li>AGB_GermlineBanking</li>
+    </researchPrerequisites>
+    <constructionSkillPrerequisite>4</constructionSkillPrerequisite>
+  </ThingDef>
+
+  <!-- Cooldown after a collection -->
+  <HediffDef>
+    <defName>AGB_RecentlySampled</defName>
+    <label>recently sampled</label>
+    <description>A germline sample was taken recently. Another can be taken once this wears off.</description>
+    <hediffClass>HediffWithComps</hediffClass>
+    <isBad>false</isBad>
+    <defaultLabelColor>(0.7, 0.8, 1.0)</defaultLabelColor>
+    <comps>
+      <li Class="HediffCompProperties_Disappears">
+        <disappearsAfterTicks>180000</disappearsAfterTicks>
+        <showRemainingTime>true</showRemainingTime>
+      </li>
+    </comps>
+  </HediffDef>
+
+  <!-- Jobs -->
+  <JobDef>
+    <defName>AGB_CollectGermline</defName>
+    <driverClass>AnimalGeneticsBreeding.JobDriver_CollectGermline</driverClass>
+    <reportString>collecting a germline sample from TargetA.</reportString>
+  </JobDef>
+  <JobDef>
+    <defName>AGB_Inseminate</defName>
+    <driverClass>AnimalGeneticsBreeding.JobDriver_Inseminate</driverClass>
+    <reportString>inseminating TargetA.</reportString>
+  </JobDef>
+
+  <WorkGiverDef>
+    <defName>AGB_Germline</defName>
+    <label>collect germline samples and inseminate animals</label>
+    <giverClass>AnimalGeneticsBreeding.WorkGiver_Germline</giverClass>
+    <workType>Handling</workType>
+    <verb>handle</verb>
+    <gerund>handling</gerund>
+    <priorityInType>75</priorityInType>
+    <requiredCapacities>
+      <li>Manipulation</li>
+    </requiredCapacities>
+  </WorkGiverDef>
+
+  <!-- Egg sorting -->
+  <SpecialThingFilterDef>
+    <defName>AGB_EggsGoodGenes</defName>
+    <label>good genes</label>
+    <description>Fertilized eggs whose chick will have a breeding score of 0% or better (or whose genes aren't known yet).</description>
+    <parentCategory>EggsFertilized</parentCategory>
+    <allowedByDefault>true</allowedByDefault>
+    <saveKey>agbEggsGoodGenes</saveKey>
+    <workerClass>AnimalGeneticsBreeding.SpecialThingFilterWorker_EggGenes_Good</workerClass>
+  </SpecialThingFilterDef>
+  <SpecialThingFilterDef>
+    <defName>AGB_EggsPoorGenes</defName>
+    <label>poor genes</label>
+    <description>Fertilized eggs whose chick will have a breeding score below 0%.</description>
+    <parentCategory>EggsFertilized</parentCategory>
+    <allowedByDefault>true</allowedByDefault>
+    <saveKey>agbEggsPoorGenes</saveKey>
+    <workerClass>AnimalGeneticsBreeding.SpecialThingFilterWorker_EggGenes_Poor</workerClass>
+  </SpecialThingFilterDef>
+
+</Defs>

@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ModMetaData><name>AGB Test Harness</name><packageId>iyedm.agbtest</packageId><author>iyedm</author>
+<supportedVersions><li>1.6</li></supportedVersions><description>test only</description>
+<loadAfter><li>iyedm.AnimalGeneticsBreeding</li></loadAfter></ModMetaData>

@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Patch>
+  <Operation Class="PatchOperationAdd">
+    <xpath>/Defs/ThingDef[@Name="BasePawn"]/comps</xpath>
+    <value>
+      <li Class="AnimalGeneticsBreeding.CompProperties_Breeding" />
+    </value>
+  </Operation>
+  <Operation Class="PatchOperationAdd">
+    <xpath>/Defs/ThingDef[@Name="BasePawn"]/inspectorTabs</xpath>
+    <value>
+      <li>AnimalGeneticsBreeding.ITab_Pedigree</li>
+    </value>
+  </Operation>
+  <!-- Genetics tab (Animal Genetics): after the gene columns -->
+  <Operation Class="PatchOperationInsert">
+    <xpath>/Defs/PawnTableDef[defName="Genetics"]/columns/li[text()="AnimalGenetics_Placeholder"]</xpath>
+    <order>Append</order>
+    <value>
+      <li>AGB_BreedingScore</li>
+      <li>AGB_HerdRole</li>
+    </value>
+  </Operation>
+  <!-- Vanilla Animals tab: next to the slaughter checkbox -->
+  <Operation Class="PatchOperationInsert">
+    <xpath>/Defs/PawnTableDef[defName="Animals"]/columns/li[text()="Slaughter"]</xpath>
+    <order>Prepend</order>
+    <value>
+      <li>AGB_BreedingScore</li>
+      <li>AGB_HerdRole</li>
+    </value>
+  </Operation>
+  <!-- Germline operations in every animal's Health tab -->
+  <Operation Class="PatchOperationAdd">
+    <xpath>/Defs/ThingDef[@Name="AnimalThingBase"]/recipes</xpath>
+    <value>
+      <li>AGB_Operation_CollectGermline</li>
+      <li>AGB_Operation_Inseminate</li>
+      <li>AGB_Operation_SerumStabilizing</li>
+      <li>AGB_Operation_SerumMutagenic</li>
+      <li>AGB_Operation_SerumDominance_Health</li>
+      <li>AGB_Operation_SerumDominance_Damage</li>
+      <li>AGB_Operation_SerumDominance_MoveSpeed</li>
+      <li>AGB_Operation_SerumDominance_CarryingCapacity</li>
+      <li>AGB_Operation_SerumDominance_MeatAmount</li>
+      <li>AGB_Operation_SerumDominance_LeatherAmount</li>
+      <li>AGB_Operation_SerumDominance_Wildness</li>
+      <li>AGB_Operation_SerumDominance_GatherYield</li>
+    </value>
+  </Operation>
+</Patch>

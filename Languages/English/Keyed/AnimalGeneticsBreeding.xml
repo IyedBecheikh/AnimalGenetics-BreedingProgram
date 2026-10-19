@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+  <!-- Roles -->
+  <AGB.Role_None>no role</AGB.Role_None>
+  <AGB.Role_Breeder>breeder</AGB.Role_Breeder>
+  <AGB.Role_Keep>keep</AGB.Role_Keep>
+  <AGB.Role_Cull>cull</AGB.Role_Cull>
+  <AGB.RoleDesc_None>Handled by the species' breeding program rules.</AGB.RoleDesc_None>
+  <AGB.RoleDesc_Breeder>Allowed to breed even when the species is restricted to breeders. Never auto-slaughtered.</AGB.RoleDesc_Breeder>
+  <AGB.RoleDesc_Keep>Never auto-slaughtered. Breeds according to the species' mating rules.</AGB.RoleDesc_Keep>
+  <AGB.RoleDesc_Cull>Never breeds. First in line for auto-slaughter.</AGB.RoleDesc_Cull>
+  <AGB.SetRoleMany>{0} ({1} animals)</AGB.SetRoleMany>
+  <AGB.CommandRole>Role: {0}</AGB.CommandRole>
+  <AGB.CommandRoleDesc>Set this animal's herd role (applies to all selected animals).\n\nBreeder: may breed and is never auto-slaughtered.\nKeep: never auto-slaughtered.\nCull: never breeds, slaughtered first.</AGB.CommandRoleDesc>
+  <AGB.TopMale>top male</AGB.TopMale>
+  <AGB.InspectScore>Breeding score: {0} ({1})</AGB.InspectScore>
+
+  <!-- Presets -->
+  <AGB.Preset_Balanced>Balanced</AGB.Preset_Balanced>
+  <AGB.Preset_PackAnimal>Pack animal</AGB.Preset_PackAnimal>
+  <AGB.Preset_Meat>Meat and leather</AGB.Preset_Meat>
+  <AGB.Preset_Produce>Milk, wool and eggs</AGB.Preset_Produce>
+  <AGB.Preset_WarBeast>War beast</AGB.Preset_WarBeast>
+  <AGB.Preset_Docile>Docile</AGB.Preset_Docile>
+  <AGB.Preset_Custom>Custom</AGB.Preset_Custom>
+
+  <!-- Score tooltip -->
+  <AGB.ScoreExplainHeader>Breeding score (goal: {0})</AGB.ScoreExplainHeader>
+  <AGB.ScoreExplainTotal>Weighted score: {0}</AGB.ScoreExplainTotal>
+
+  <!-- Window -->
+  <AGB.OpenProgram>Breeding program</AGB.OpenProgram>
+  <AGB.OpenProgramFor>Breeding program: {0}...</AGB.OpenProgramFor>
+  <AGB.ProgramTitle>Breeding program</AGB.ProgramTitle>
+  <AGB.NoAnimals>You have no animals with genetics on this map.</AGB.NoAnimals>
+  <AGB.SectionGoal>Breeding goal</AGB.SectionGoal>
+  <AGB.SectionGoalTip>How much each gene counts toward the breeding score. Set a gene to 0 to ignore it.</AGB.SectionGoalTip>
+  <AGB.Preset>Preset</AGB.Preset>
+  <AGB.WeightLabel>{0}: {1}</AGB.WeightLabel>
+  <AGB.Ignored>ignored</AGB.Ignored>
+
+  <AGB.SectionMating>Mating</AGB.SectionMating>
+  <AGB.Mating_Open>Open breeding</AGB.Mating_Open>
+  <AGB.Mating_BreedersOnly>Only breeder males</AGB.Mating_BreedersOnly>
+  <AGB.Mating_BestMales>Best males by score</AGB.Mating_BestMales>
+  <AGB.MatingTip_Open>Any male may breed (vanilla behavior). Cull-tagged animals still never breed.</AGB.MatingTip_Open>
+  <AGB.MatingTip_BreedersOnly>Only males with the Breeder role may breed.</AGB.MatingTip_BreedersOnly>
+  <AGB.MatingTip_BestMales>The top males by breeding score may breed, plus any male with the Breeder role. Rankings update automatically.</AGB.MatingTip_BestMales>
+  <AGB.BestMalesCount>Number of best males allowed to breed: {0}</AGB.BestMalesCount>
+  <AGB.FemalesNeedBreeder>Females also need the Breeder role</AGB.FemalesNeedBreeder>
+  <AGB.FemalesNeedBreederTip>If checked, only females with the Breeder role can be bred.</AGB.FemalesNeedBreederTip>
+
+  <AGB.SectionSlaughter>Auto-slaughter</AGB.SectionSlaughter>
+  <AGB.GeneAwareSlaughter>Slaughter worst genes first</AGB.GeneAwareSlaughter>
+  <AGB.GeneAwareSlaughterTip>Vanilla auto-slaughter still decides how many animals go. With this on, the ones with the lowest breeding score go first instead of the oldest. Breeder and Keep animals are never auto-slaughtered either way.</AGB.GeneAwareSlaughterTip>
+  <AGB.ProtectTop>Protect the best {0} of each sex</AGB.ProtectTop>
+  <AGB.ProtectTopTip>The top animals of each sex by breeding score are never auto-slaughtered.</AGB.ProtectTopTip>
+  <AGB.SlaughterCulled>Always slaughter Cull animals</AGB.SlaughterCulled>
+  <AGB.SlaughterCulledTip>Cull-tagged animals are slaughtered even if you are under the auto-slaughter limits.</AGB.SlaughterCulledTip>
+  <AGB.SlaughterBelow>Slaughter adults below a score</AGB.SlaughterBelow>
+  <AGB.SlaughterBelowTip>Adults with a breeding score below the threshold are slaughtered even if you are under the auto-slaughter limits. Protected animals are exempt.</AGB.SlaughterBelowTip>
+  <AGB.MinScore>Minimum score: {0}</AGB.MinScore>
+  <AGB.OpenAutoSlaughter>Auto-slaughter limits...</AGB.OpenAutoSlaughter>
+
+  <AGB.ColName>Name</AGB.ColName>
+  <AGB.ColAge>Age</AGB.ColAge>
+  <AGB.ColScore>Score</AGB.ColScore>
+  <AGB.ColRole>Role</AGB.ColRole>
+  <AGB.ColStatus>Status</AGB.ColStatus>
+  <AGB.ClickToSelect>Click to jump to and select this animal.</AGB.ClickToSelect>
+  <AGB.StatusSlaughter>to slaughter</AGB.StatusSlaughter>
+  <AGB.StatusNoBreeding>won't breed</AGB.StatusNoBreeding>
+  <AGB.StatusPregnant>pregnant</AGB.StatusPregnant>
+  <!-- Phase 2: settings -->
+  <AGB.SettingsCategory>Animal Genetics: Breeding Program</AGB.SettingsCategory>
+  <AGB.SettingInbreeding>Inbreeding depression</AGB.SettingInbreeding>
+  <AGB.SettingInbreedingTip>When on, children of related parents get worse genes, in proportion to how related the parents are. Off by default.</AGB.SettingInbreedingTip>
+  <AGB.SettingPenalty>Full-sibling children lose {0}% on every gene</AGB.SettingPenalty>
+  <AGB.SettingPenaltyTip>Gene loss scales with the inbreeding coefficient: half siblings lose half as much, cousins about a quarter.</AGB.SettingPenaltyTip>
+
+  <!-- Kinship -->
+  <AGB.KinUnrelated>unrelated</AGB.KinUnrelated>
+  <AGB.KinDistant>distant relatives</AGB.KinDistant>
+  <AGB.KinModerate>half siblings or similar</AGB.KinModerate>
+  <AGB.KinClose>full siblings or parent and child</AGB.KinClose>
+
+  <!-- Pedigree tab -->
+  <AGB.TabPedigree>Pedigree</AGB.TabPedigree>
+  <AGB.PedigreeOf>Pedigree of {0}</AGB.PedigreeOf>
+  <AGB.PedigreeInbreeding>Inbreeding coefficient: {0}% ({1})</AGB.PedigreeInbreeding>
+  <AGB.UnknownDam>Unknown dam</AGB.UnknownDam>
+  <AGB.UnknownSire>Unknown sire</AGB.UnknownSire>
+  <AGB.Dam>Dam</AGB.Dam>
+  <AGB.Sire>Sire</AGB.Sire>
+  <AGB.Deceased>(dead)</AGB.Deceased>
+  <AGB.GoneFromWorld>(gone)</AGB.GoneFromWorld>
+  <AGB.NoRecord>No genetic record (wild-born or bought).</AGB.NoRecord>
+  <AGB.PedigreeSourceHint>♀/♂ = gene inherited from dam/sire</AGB.PedigreeSourceHint>
+
+  <!-- Pairings -->
+  <AGB.TabHerd>Herd</AGB.TabHerd>
+  <AGB.TabPairings>Pairings</AGB.TabPairings>
+  <AGB.NoPairs>You need at least one fertile male and one fertile female (not Cull) of this species.</AGB.NoPairs>
+  <AGB.ColGene>Gene</AGB.ColGene>
+  <AGB.ColChildAvg>Child avg</AGB.ColChildAvg>
+  <AGB.ColChildRange>Child 90%</AGB.ColChildRange>
+  <AGB.PredScore>Child breeding score: {0} on average (90% of children between {1} and {2})</AGB.PredScore>
+  <AGB.PredBeatsParents>Chance a child beats both parents: {0}</AGB.PredBeatsParents>
+  <AGB.PredBeatsHerd>Chance a child beats your best animal ({1}): {0}</AGB.PredBeatsHerd>
+  <AGB.PredKinship>Relatedness: {0}% ({1}).</AGB.PredKinship>
+  <AGB.PredPenalty>Inbreeding costs about {0}% per gene.</AGB.PredPenalty>
+  <AGB.PredPenaltyOff>(Inbreeding depression is off in mod settings.)</AGB.PredPenaltyOff>
+  <AGB.PredBlocked>Current mating rules prevent this pair from breeding.</AGB.PredBlocked>
+  <AGB.TagPairBreeders>Tag both as Breeder</AGB.TagPairBreeders>
+  <AGB.SuggestedPairs>Best pairs by expected child score</AGB.SuggestedPairs>
+  <AGB.Blocked>(blocked by rules)</AGB.Blocked>
+  <AGB.ExpectedShort>expected {0}</AGB.ExpectedShort>
+  <AGB.PreviewPairings>Preview pairings: {0}...</AGB.PreviewPairings>
+  <!-- Phase 3: germline banking -->
+  <AGB.SampleLabel>{0} ({1}, {2})</AGB.SampleLabel>
+  <AGB.SampleScore>Donor breeding score: {0}</AGB.SampleScore>
+  <AGB.SamplePreserved>Preserved (frozen or in a powered cryobank)</AGB.SamplePreserved>
+  <AGB.SampleViable>Viable for {0} more days unless frozen</AGB.SampleViable>
+  <AGB.SampleExpired>{0} is no longer viable and was discarded.</AGB.SampleExpired>
+  <AGB.SampleCollected>A germline sample was collected from {0}.</AGB.SampleCollected>
+  <AGB.InseminationSucceeded>{0} was successfully inseminated with {1}'s sample.</AGB.InseminationSucceeded>
+  <AGB.InseminationFailed>Insemination of {0} failed. The sample was used up.</AGB.InseminationFailed>
+  <AGB.CommandCollect>Collect sample</AGB.CommandCollect>
+  <AGB.CommandCollectDesc>Have a handler collect a germline sample from this male. The sample keeps his exact genes and can be used to inseminate females later, even after he is gone.
+
+Samples stay viable for 3 days unless frozen or kept in a powered cryobank.</AGB.CommandCollectDesc>
+  <AGB.RecentlySampled>A sample was taken recently.</AGB.RecentlySampled>
+  <AGB.CommandInseminate>Inseminate...</AGB.CommandInseminate>
+  <AGB.CommandInseminateDesc>Choose a germline sample. A handler will bring it and inseminate this female (60% chance, +3% per Animals skill level, up to 95%). Egg-layers will lay fertilized eggs fathered by the sample.</AGB.CommandInseminateDesc>
+  <AGB.CommandInseminateCancel>Cancel insemination</AGB.CommandInseminateCancel>
+  <AGB.CommandInseminatePending>Waiting for a handler to inseminate with {0}. Click to cancel.</AGB.CommandInseminatePending>
+  <AGB.CannotReceive>Not fertile right now (pregnant, already fertilized, sterile or too young).</AGB.CannotReceive>
+  <AGB.NoSamples>There are no germline samples for {0} on this map.</AGB.NoSamples>
+  <AGB.SampleOption>{0}'s sample ({1}): child expected {2}</AGB.SampleOption>
+  <AGB.SampleOptionKin>related {0}%</AGB.SampleOptionKin>
+  <!-- Phases 4-5: serums, gene splice, VGE -->
+  <AGB.CommandSerum>Apply serum...</AGB.CommandSerum>
+  <AGB.CommandSerumDesc>Choose a breeding serum. A handler will give it to this female; it changes how her next offspring inherit genes.\n\nDominance: one chosen gene always comes from the better parent.\nStabilizing: children mutate much less.\nMutagenic: children mutate much more.</AGB.CommandSerumDesc>
+  <AGB.CommandSerumCancel>Cancel serum</AGB.CommandSerumCancel>
+  <AGB.CommandSerumPending>Waiting for a handler to give {0}. Click to cancel.</AGB.CommandSerumPending>
+  <AGB.NoSerums>There are no breeding serums on this map.</AGB.NoSerums>
+  <AGB.SerumOptionGene>{0}: {1}</AGB.SerumOptionGene>
+  <AGB.SerumApplied>{0} was given {1}.</AGB.SerumApplied>
+
+  <AGB.CommandSplice>Gene splice...</AGB.CommandSplice>
+  <AGB.CommandSpliceDesc>Move one gene from a donor sample into a target sample stored in this cryobank. The target's gene moves {0}% of the way to the donor's value; the donor sample is used up. A doctor does the work; the cryobank must be powered.</AGB.CommandSpliceDesc>
+  <AGB.CommandSpliceCancel>Cancel gene splice</AGB.CommandSpliceCancel>
+  <AGB.CommandSplicePending>Waiting for a doctor to splice {2} from {1} into {0}. Click to cancel.</AGB.CommandSplicePending>
+  <AGB.SpliceNeedsTwo>Store at least two samples of the same species in this cryobank.</AGB.SpliceNeedsTwo>
+  <AGB.SpliceTitle>Gene splice</AGB.SpliceTitle>
+  <AGB.SpliceExplain>Pick the sample to improve, the sample to take a gene from, then the gene. The gene moves {0}% of the way to the donor's value.</AGB.SpliceExplain>
+  <AGB.SpliceTarget>Target sample (kept, improved)</AGB.SpliceTarget>
+  <AGB.SpliceDonor>Donor sample (used up)</AGB.SpliceDonor>
+  <AGB.SpliceGene>Gene</AGB.SpliceGene>
+  <AGB.SplicePickFirst>Pick a target and a donor of the same species first.</AGB.SplicePickFirst>
+  <AGB.SpliceConfirm>Queue splice</AGB.SpliceConfirm>
+  <AGB.SpliceDone>Gene splice complete: {0}.</AGB.SpliceDone>
+  <AGB.SplicedName>{0}, {1}-spliced</AGB.SplicedName>
+  <AGB.SplicePendingShort>Gene splice queued ({0})</AGB.SplicePendingShort>
+  <AGB.CryobankCount>Samples stored: {0}</AGB.CryobankCount>
+
+  <AGB.GenomeFrom>{0} (from {1})</AGB.GenomeFrom>
+  <AGB.GenomeProfile>Taken from {0} (breeding score {1}). Hybrids made with it inherit these genes:</AGB.GenomeProfile>
+  <AGB.LineageInspect>Carries genome genetics: the hybrid will inherit them.</AGB.LineageInspect>
+  <AGB.PedigreeStock>pedigree stock</AGB.PedigreeStock>
+  <AGB.SampleValueFactor>Donor genes: x{0}</AGB.SampleValueFactor>
+</LanguageData>

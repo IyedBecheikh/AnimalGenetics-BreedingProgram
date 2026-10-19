@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Patch>
+  <Operation Class="PatchOperationFindMod">
+    <mods>
+      <li>Vanilla Genetics Expanded</li>
+    </mods>
+    <match Class="PatchOperationSequence">
+      <operations>
+        <!-- Genomes remember the animal they came from -->
+        <li Class="PatchOperationAdd">
+          <xpath>/Defs/ThingDef[@Name="GR_GeneticsBase"]/comps</xpath>
+          <value>
+            <li Class="AnimalGeneticsBreeding.CompProperties_GenomeProfile" />
+          </value>
+        </li>
+        <!-- Growth cells and electrowombs carry that lineage to the hybrid -->
+        <li Class="PatchOperationAdd">
+          <xpath>/Defs/ThingDef[defName="GR_GrowthCell"]/comps</xpath>
+          <value>
+            <li Class="AnimalGeneticsBreeding.CompProperties_HybridLineage" />
+          </value>
+        </li>
+        <li Class="PatchOperationAdd">
+          <xpath>/Defs/ThingDef[comps/li/@Class="GeneticRim.CompProperties_ElectroWomb"]/comps</xpath>
+          <value>
+            <li Class="AnimalGeneticsBreeding.CompProperties_HybridLineage" />
+          </value>
+        </li>
+
+        <!-- Research lives on VGE's genetics tab and builds on Genetic Alteration -->
+        <li Class="PatchOperationReplace">
+          <xpath>/Defs/ResearchProjectDef[defName="AGB_GermlineBanking" or defName="AGB_GermlineTuning"]/tab</xpath>
+          <value>
+            <tab>GR_GeneticReseach</tab>
+          </value>
+        </li>
+        <li Class="PatchOperationAdd">
+          <xpath>/Defs/ResearchProjectDef[defName="AGB_GermlineBanking"]/prerequisites</xpath>
+          <value>
+            <li>GR_GeneticAlteration</li>
+          </value>
+        </li>
+        <li Class="PatchOperationReplace">
+          <xpath>/Defs/ResearchProjectDef[defName="AGB_GermlineBanking"]/researchViewY</xpath>
+          <value>
+            <researchViewY>3</researchViewY>
+          </value>
+        </li>
+        <li Class="PatchOperationReplace">
+          <xpath>/Defs/ResearchProjectDef[defName="AGB_GermlineTuning"]/researchViewY</xpath>
+          <value>
+            <researchViewY>3</researchViewY>
+          </value>
+        </li>
+        <li Class="PatchOperationReplace">
+          <xpath>/Defs/ResearchProjectDef[defName="AGB_GermlineTuning"]/researchViewX</xpath>
+          <value>
+            <researchViewX>2</researchViewX>
+          </value>
+        </li>
+        <li Class="PatchOperationRemove">
+          <xpath>/Defs/ResearchTabDef[defName="AGB_Breeding"]</xpath>
+        </li>
+
+        <!-- Serums can also be made at the genetics tinkering table -->
+        <li Class="PatchOperationAdd">
+          <xpath>/Defs/ThingDef[@Name="AGB_SerumBase"]/recipeMaker/recipeUsers</xpath>
+          <value>
+            <li>GR_GeneticsTinkeringTable</li>
+          </value>
+        </li>
+
+        <!-- The genetics trader deals in germline samples and serums -->
+        <li Class="PatchOperationAdd">
+          <xpath>/Defs/TraderKindDef[defName="GR_Outlander_CaravanTrader"]/stockGenerators</xpath>
+          <value>
+            <li Class="AnimalGeneticsBreeding.StockGenerator_GermlineSamples">
+              <countRange>2~4</countRange>
+            </li>
+            <li Class="StockGenerator_SingleDef">
+              <thingDef>AGB_SerumDominance</thingDef>
+              <countRange>0~2</countRange>
+            </li>
+            <li Class="StockGenerator_SingleDef">
+              <thingDef>AGB_SerumStabilizing</thingDef>
+              <countRange>0~2</countRange>
+            </li>
+            <li Class="StockGenerator_SingleDef">
+              <thingDef>AGB_SerumMutagenic</thingDef>
+              <countRange>0~2</countRange>
+            </li>
+          </value>
+        </li>
+      </operations>
+    </match>
+  </Operation>
+</Patch>

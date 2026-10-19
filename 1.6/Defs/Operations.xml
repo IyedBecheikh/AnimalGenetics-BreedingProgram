@@ -1,0 +1,348 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Health-tab operations (doctors). Generated list; see Tests and Source/Operations.cs. -->
+<Defs>
+
+  <RecipeDef Name="AGB_GermlineOperationBase" ParentName="SurgeryFlesh" Abstract="True">
+    <hideBodyPartNames>true</hideBodyPartNames>
+    <targetsBodyPart>false</targetsBodyPart>
+    <anesthetize>false</anesthetize>
+    <surgerySuccessChanceFactor>99999</surgerySuccessChanceFactor>
+    <researchPrerequisite>AGB_GermlineBanking</researchPrerequisite>
+  </RecipeDef>
+
+  <RecipeDef ParentName="AGB_GermlineOperationBase">
+    <defName>AGB_Operation_CollectGermline</defName>
+    <label>collect germline sample</label>
+    <description>Collect a germline sample from this male. The sample keeps his exact genes and can be used to inseminate females later, even after he is gone. Viable for 3 days unless frozen or kept in a powered cryobank.</description>
+    <workerClass>AnimalGeneticsBreeding.Recipe_CollectGermline</workerClass>
+    <jobString>Collecting a germline sample.</jobString>
+    <workAmount>400</workAmount>
+    <genderPrerequisite>Male</genderPrerequisite>
+  </RecipeDef>
+
+  <RecipeDef ParentName="AGB_GermlineOperationBase">
+    <defName>AGB_Operation_Inseminate</defName>
+    <label>inseminate (best sample)</label>
+    <description>Inseminate this female with the best matching germline sample on the map (the one with the highest expected child score). Success chance: 60% plus 3% per Medicine level, up to 95%. To pick a specific sample, use the Inseminate gizmo instead.</description>
+    <workerClass>AnimalGeneticsBreeding.Recipe_Inseminate</workerClass>
+    <jobString>Inseminating.</jobString>
+    <workAmount>400</workAmount>
+    <genderPrerequisite>Female</genderPrerequisite>
+    <ingredients>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>AGB_GermlineSample</li>
+          </thingDefs>
+        </filter>
+        <count>1</count>
+      </li>
+    </ingredients>
+    <fixedIngredientFilter>
+      <thingDefs>
+        <li>AGB_GermlineSample</li>
+      </thingDefs>
+    </fixedIngredientFilter>
+  </RecipeDef>
+
+  <RecipeDef ParentName="AGB_GermlineOperationBase">
+    <defName>AGB_Operation_SerumStabilizing</defName>
+    <label>give stabilizing serum</label>
+    <description>Her next offspring mutate much less (x0.25 spread).</description>
+    <workerClass>AnimalGeneticsBreeding.Recipe_ApplySerum</workerClass>
+    <researchPrerequisite>AGB_GermlineTuning</researchPrerequisite>
+    <jobString>Giving a breeding serum.</jobString>
+    <workAmount>250</workAmount>
+    <genderPrerequisite>Female</genderPrerequisite>
+    <ingredients>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>AGB_SerumStabilizing</li>
+          </thingDefs>
+        </filter>
+        <count>1</count>
+      </li>
+    </ingredients>
+    <fixedIngredientFilter>
+      <thingDefs>
+        <li>AGB_SerumStabilizing</li>
+      </thingDefs>
+    </fixedIngredientFilter>
+  </RecipeDef>
+
+  <RecipeDef ParentName="AGB_GermlineOperationBase">
+    <defName>AGB_Operation_SerumMutagenic</defName>
+    <label>give mutagenic serum</label>
+    <description>Her next offspring mutate much more (x3 spread).</description>
+    <workerClass>AnimalGeneticsBreeding.Recipe_ApplySerum</workerClass>
+    <researchPrerequisite>AGB_GermlineTuning</researchPrerequisite>
+    <jobString>Giving a breeding serum.</jobString>
+    <workAmount>250</workAmount>
+    <genderPrerequisite>Female</genderPrerequisite>
+    <ingredients>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>AGB_SerumMutagenic</li>
+          </thingDefs>
+        </filter>
+        <count>1</count>
+      </li>
+    </ingredients>
+    <fixedIngredientFilter>
+      <thingDefs>
+        <li>AGB_SerumMutagenic</li>
+      </thingDefs>
+    </fixedIngredientFilter>
+  </RecipeDef>
+
+  <RecipeDef ParentName="AGB_GermlineOperationBase">
+    <defName>AGB_Operation_SerumDominance_Health</defName>
+    <label>give dominance serum (health)</label>
+    <description>Her next offspring always inherit the better parent's health gene.</description>
+    <workerClass>AnimalGeneticsBreeding.Recipe_ApplySerum</workerClass>
+    <researchPrerequisite>AGB_GermlineTuning</researchPrerequisite>
+    <jobString>Giving a breeding serum.</jobString>
+    <workAmount>250</workAmount>
+    <genderPrerequisite>Female</genderPrerequisite>
+    <ingredients>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>AGB_SerumDominance</li>
+          </thingDefs>
+        </filter>
+        <count>1</count>
+      </li>
+    </ingredients>
+    <fixedIngredientFilter>
+      <thingDefs>
+        <li>AGB_SerumDominance</li>
+      </thingDefs>
+    </fixedIngredientFilter>
+    <modExtensions>
+      <li Class="AnimalGeneticsBreeding.SerumGeneExtension">
+        <gene>Health</gene>
+      </li>
+    </modExtensions>
+  </RecipeDef>
+
+  <RecipeDef ParentName="AGB_GermlineOperationBase">
+    <defName>AGB_Operation_SerumDominance_Damage</defName>
+    <label>give dominance serum (damage)</label>
+    <description>Her next offspring always inherit the better parent's damage gene.</description>
+    <workerClass>AnimalGeneticsBreeding.Recipe_ApplySerum</workerClass>
+    <researchPrerequisite>AGB_GermlineTuning</researchPrerequisite>
+    <jobString>Giving a breeding serum.</jobString>
+    <workAmount>250</workAmount>
+    <genderPrerequisite>Female</genderPrerequisite>
+    <ingredients>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>AGB_SerumDominance</li>
+          </thingDefs>
+        </filter>
+        <count>1</count>
+      </li>
+    </ingredients>
+    <fixedIngredientFilter>
+      <thingDefs>
+        <li>AGB_SerumDominance</li>
+      </thingDefs>
+    </fixedIngredientFilter>
+    <modExtensions>
+      <li Class="AnimalGeneticsBreeding.SerumGeneExtension">
+        <gene>Damage</gene>
+      </li>
+    </modExtensions>
+  </RecipeDef>
+
+  <RecipeDef ParentName="AGB_GermlineOperationBase">
+    <defName>AGB_Operation_SerumDominance_MoveSpeed</defName>
+    <label>give dominance serum (speed)</label>
+    <description>Her next offspring always inherit the better parent's speed gene.</description>
+    <workerClass>AnimalGeneticsBreeding.Recipe_ApplySerum</workerClass>
+    <researchPrerequisite>AGB_GermlineTuning</researchPrerequisite>
+    <jobString>Giving a breeding serum.</jobString>
+    <workAmount>250</workAmount>
+    <genderPrerequisite>Female</genderPrerequisite>
+    <ingredients>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>AGB_SerumDominance</li>
+          </thingDefs>
+        </filter>
+        <count>1</count>
+      </li>
+    </ingredients>
+    <fixedIngredientFilter>
+      <thingDefs>
+        <li>AGB_SerumDominance</li>
+      </thingDefs>
+    </fixedIngredientFilter>
+    <modExtensions>
+      <li Class="AnimalGeneticsBreeding.SerumGeneExtension">
+        <gene>MoveSpeed</gene>
+      </li>
+    </modExtensions>
+  </RecipeDef>
+
+  <RecipeDef ParentName="AGB_GermlineOperationBase">
+    <defName>AGB_Operation_SerumDominance_CarryingCapacity</defName>
+    <label>give dominance serum (capacity)</label>
+    <description>Her next offspring always inherit the better parent's capacity gene.</description>
+    <workerClass>AnimalGeneticsBreeding.Recipe_ApplySerum</workerClass>
+    <researchPrerequisite>AGB_GermlineTuning</researchPrerequisite>
+    <jobString>Giving a breeding serum.</jobString>
+    <workAmount>250</workAmount>
+    <genderPrerequisite>Female</genderPrerequisite>
+    <ingredients>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>AGB_SerumDominance</li>
+          </thingDefs>
+        </filter>
+        <count>1</count>
+      </li>
+    </ingredients>
+    <fixedIngredientFilter>
+      <thingDefs>
+        <li>AGB_SerumDominance</li>
+      </thingDefs>
+    </fixedIngredientFilter>
+    <modExtensions>
+      <li Class="AnimalGeneticsBreeding.SerumGeneExtension">
+        <gene>CarryingCapacity</gene>
+      </li>
+    </modExtensions>
+  </RecipeDef>
+
+  <RecipeDef ParentName="AGB_GermlineOperationBase">
+    <defName>AGB_Operation_SerumDominance_MeatAmount</defName>
+    <label>give dominance serum (meat)</label>
+    <description>Her next offspring always inherit the better parent's meat gene.</description>
+    <workerClass>AnimalGeneticsBreeding.Recipe_ApplySerum</workerClass>
+    <researchPrerequisite>AGB_GermlineTuning</researchPrerequisite>
+    <jobString>Giving a breeding serum.</jobString>
+    <workAmount>250</workAmount>
+    <genderPrerequisite>Female</genderPrerequisite>
+    <ingredients>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>AGB_SerumDominance</li>
+          </thingDefs>
+        </filter>
+        <count>1</count>
+      </li>
+    </ingredients>
+    <fixedIngredientFilter>
+      <thingDefs>
+        <li>AGB_SerumDominance</li>
+      </thingDefs>
+    </fixedIngredientFilter>
+    <modExtensions>
+      <li Class="AnimalGeneticsBreeding.SerumGeneExtension">
+        <gene>MeatAmount</gene>
+      </li>
+    </modExtensions>
+  </RecipeDef>
+
+  <RecipeDef ParentName="AGB_GermlineOperationBase">
+    <defName>AGB_Operation_SerumDominance_LeatherAmount</defName>
+    <label>give dominance serum (leather)</label>
+    <description>Her next offspring always inherit the better parent's leather gene.</description>
+    <workerClass>AnimalGeneticsBreeding.Recipe_ApplySerum</workerClass>
+    <researchPrerequisite>AGB_GermlineTuning</researchPrerequisite>
+    <jobString>Giving a breeding serum.</jobString>
+    <workAmount>250</workAmount>
+    <genderPrerequisite>Female</genderPrerequisite>
+    <ingredients>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>AGB_SerumDominance</li>
+          </thingDefs>
+        </filter>
+        <count>1</count>
+      </li>
+    </ingredients>
+    <fixedIngredientFilter>
+      <thingDefs>
+        <li>AGB_SerumDominance</li>
+      </thingDefs>
+    </fixedIngredientFilter>
+    <modExtensions>
+      <li Class="AnimalGeneticsBreeding.SerumGeneExtension">
+        <gene>LeatherAmount</gene>
+      </li>
+    </modExtensions>
+  </RecipeDef>
+
+  <RecipeDef ParentName="AGB_GermlineOperationBase">
+    <defName>AGB_Operation_SerumDominance_Wildness</defName>
+    <label>give dominance serum (wildness)</label>
+    <description>Her next offspring always inherit the better parent's wildness gene.</description>
+    <workerClass>AnimalGeneticsBreeding.Recipe_ApplySerum</workerClass>
+    <researchPrerequisite>AGB_GermlineTuning</researchPrerequisite>
+    <jobString>Giving a breeding serum.</jobString>
+    <workAmount>250</workAmount>
+    <genderPrerequisite>Female</genderPrerequisite>
+    <ingredients>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>AGB_SerumDominance</li>
+          </thingDefs>
+        </filter>
+        <count>1</count>
+      </li>
+    </ingredients>
+    <fixedIngredientFilter>
+      <thingDefs>
+        <li>AGB_SerumDominance</li>
+      </thingDefs>
+    </fixedIngredientFilter>
+    <modExtensions>
+      <li Class="AnimalGeneticsBreeding.SerumGeneExtension">
+        <gene>Wildness</gene>
+      </li>
+    </modExtensions>
+  </RecipeDef>
+
+  <RecipeDef ParentName="AGB_GermlineOperationBase">
+    <defName>AGB_Operation_SerumDominance_GatherYield</defName>
+    <label>give dominance serum (milk/wool/eggs)</label>
+    <description>Her next offspring always inherit the better parent's milk/wool/eggs gene.</description>
+    <workerClass>AnimalGeneticsBreeding.Recipe_ApplySerum</workerClass>
+    <researchPrerequisite>AGB_GermlineTuning</researchPrerequisite>
+    <jobString>Giving a breeding serum.</jobString>
+    <workAmount>250</workAmount>
+    <genderPrerequisite>Female</genderPrerequisite>
+    <ingredients>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>AGB_SerumDominance</li>
+          </thingDefs>
+        </filter>
+        <count>1</count>
+      </li>
+    </ingredients>
+    <fixedIngredientFilter>
+      <thingDefs>
+        <li>AGB_SerumDominance</li>
+      </thingDefs>
+    </fixedIngredientFilter>
+    <modExtensions>
+      <li Class="AnimalGeneticsBreeding.SerumGeneExtension">
+        <gene>GatherYield</gene>
+      </li>
+    </modExtensions>
+  </RecipeDef>
+
+</Defs>

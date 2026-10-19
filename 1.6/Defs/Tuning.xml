@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+  <ResearchProjectDef>
+    <defName>AGB_GermlineTuning</defName>
+    <label>germline tuning</label>
+    <description>Breeding serums that bias how a mother's next offspring inherit genes, and gene splicing between stored germline samples.</description>
+    <baseCost>1800</baseCost>
+    <techLevel>Industrial</techLevel>
+    <tab>AGB_Breeding</tab>
+    <prerequisites>
+      <li>AGB_GermlineBanking</li>
+      <li>MedicineProduction</li>
+    </prerequisites>
+    <researchViewX>1</researchViewX>
+    <researchViewY>0</researchViewY>
+  </ResearchProjectDef>
+
+  <!-- Serum items -->
+  <ThingDef Name="AGB_SerumBase" ParentName="ResourceBase" Abstract="True">
+    <thingClass>ThingWithComps</thingClass>
+    <stackLimit>25</stackLimit>
+    <useHitPoints>true</useHitPoints>
+    <healthAffectsPrice>false</healthAffectsPrice>
+    <statBases>
+      <MaxHitPoints>40</MaxHitPoints>
+      <Mass>0.05</Mass>
+      <Flammability>0.5</Flammability>
+      <DeteriorationRate>2</DeteriorationRate>
+      <WorkToMake>1500</WorkToMake>
+    </statBases>
+    <thingCategories>
+      <li>AGB_GermlineSamples</li>
+    </thingCategories>
+    <techLevel>Industrial</techLevel>
+    <recipeMaker>
+      <researchPrerequisite>AGB_GermlineTuning</researchPrerequisite>
+      <recipeUsers>
+        <li>DrugLab</li>
+      </recipeUsers>
+      <workSpeedStat>DrugSynthesisSpeed</workSpeedStat>
+      <workSkill>Intellectual</workSkill>
+      <skillRequirements>
+        <Intellectual>6</Intellectual>
+      </skillRequirements>
+      <displayPriority>3100</displayPriority>
+    </recipeMaker>
+  </ThingDef>
+
+  <ThingDef ParentName="AGB_SerumBase">
+    <defName>AGB_SerumDominance</defName>
+    <label>dominance serum</label>
+    <description>Given to a female animal, makes her next offspring always inherit the better parent's value for one chosen gene (it still mutates as usual). Lasts until her next birth (mammals) or 15 days (egg-layers: affects eggs laid meanwhile).</description>
+    <graphicData>
+      <texPath>Things/Item/AGB/SerumDominance</texPath>
+      <graphicClass>Graphic_StackCount</graphicClass>
+    </graphicData>
+    <statBases>
+      <MarketValue>90</MarketValue>
+    </statBases>
+    <costList>
+      <Neutroamine>4</Neutroamine>
+      <MedicineIndustrial>1</MedicineIndustrial>
+    </costList>
+    <modExtensions>
+      <li Class="AnimalGeneticsBreeding.SerumExtension">
+        <hediff>AGB_SerumDominance</hediff>
+        <kind>Dominance</kind>
+      </li>
+    </modExtensions>
+  </ThingDef>
+
+  <ThingDef ParentName="AGB_SerumBase">
+    <defName>AGB_SerumStabilizing</defName>
+    <label>stabilizing serum</label>
+    <description>Given to a female animal, makes her next offspring mutate far less (mutation spread x0.25), so children come out close to their parents. Lasts until her next birth (mammals) or 15 days (egg-layers).</description>
+    <graphicData>
+      <texPath>Things/Item/AGB/SerumStabilizing</texPath>
+      <graphicClass>Graphic_StackCount</graphicClass>
+    </graphicData>
+    <statBases>
+      <MarketValue>60</MarketValue>
+    </statBases>
+    <costList>
+      <Neutroamine>3</Neutroamine>
+    </costList>
+    <modExtensions>
+      <li Class="AnimalGeneticsBreeding.SerumExtension">
+        <hediff>AGB_SerumStabilizing</hediff>
+        <kind>Stabilizing</kind>
+      </li>
+    </modExtensions>
+  </ThingDef>
+
+  <ThingDef ParentName="AGB_SerumBase">
+    <defName>AGB_SerumMutagenic</defName>
+    <label>mutagenic serum</label>
+    <description>Given to a female animal, makes her next offspring mutate far more (mutation spread x3): a gamble for outliers in both directions. Lasts until her next birth (mammals) or 15 days (egg-layers).</description>
+    <graphicData>
+      <texPath>Things/Item/AGB/SerumMutagenic</texPath>
+      <graphicClass>Graphic_StackCount</graphicClass>
+    </graphicData>
+    <statBases>
+      <MarketValue>60</MarketValue>
+    </statBases>
+    <costList>
+      <Neutroamine>3</Neutroamine>
+    </costList>
+    <modExtensions>
+      <li Class="AnimalGeneticsBreeding.SerumExtension">
+        <hediff>AGB_SerumMutagenic</hediff>
+        <kind>Mutagenic</kind>
+      </li>
+    </modExtensions>
+  </ThingDef>
+
+  <!-- Serum hediffs -->
+  <HediffDef Name="AGB_SerumHediffBase" Abstract="True">
+    <hediffClass>HediffWithComps</hediffClass>
+    <isBad>false</isBad>
+    <defaultLabelColor>(0.75, 0.85, 1.0)</defaultLabelColor>
+  </HediffDef>
+
+  <HediffDef ParentName="AGB_SerumHediffBase">
+    <defName>AGB_SerumDominance</defName>
+    <label>dominance serum</label>
+    <description>Her next offspring will inherit the better parent's value for the bracketed gene.</description>
+    <comps>
+      <li Class="AnimalGeneticsBreeding.HediffCompProperties_Serum">
+        <kind>Dominance</kind>
+      </li>
+      <li Class="HediffCompProperties_Disappears">
+        <disappearsAfterTicks>900000</disappearsAfterTicks>
+        <showRemainingTime>true</showRemainingTime>
+      </li>
+    </comps>
+  </HediffDef>
+
+  <HediffDef ParentName="AGB_SerumHediffBase">
+    <defName>AGB_SerumStabilizing</defName>
+    <label>stabilizing serum</label>
+    <description>Her next offspring will mutate much less.</description>
+    <comps>
+      <li Class="AnimalGeneticsBreeding.HediffCompProperties_Serum">
+        <kind>Stabilizing</kind>
+      </li>
+      <li Class="HediffCompProperties_Disappears">
+        <disappearsAfterTicks>900000</disappearsAfterTicks>
+        <showRemainingTime>true</showRemainingTime>
+      </li>
+    </comps>
+  </HediffDef>
+
+  <HediffDef ParentName="AGB_SerumHediffBase">
+    <defName>AGB_SerumMutagenic</defName>
+    <label>mutagenic serum</label>
+    <description>Her next offspring will mutate much more.</description>
+    <comps>
+      <li Class="AnimalGeneticsBreeding.HediffCompProperties_Serum">
+        <kind>Mutagenic</kind>
+      </li>
+      <li Class="HediffCompProperties_Disappears">
+        <disappearsAfterTicks>900000</disappearsAfterTicks>
+        <showRemainingTime>true</showRemainingTime>
+      </li>
+    </comps>
+  </HediffDef>
+
+  <!-- Jobs -->
+  <JobDef>
+    <defName>AGB_ApplySerum</defName>
+    <driverClass>AnimalGeneticsBreeding.JobDriver_ApplySerum</driverClass>
+    <reportString>giving a breeding serum to TargetA.</reportString>
+  </JobDef>
+  <JobDef>
+    <defName>AGB_GeneSplice</defName>
+    <driverClass>AnimalGeneticsBreeding.JobDriver_GeneSplice</driverClass>
+    <reportString>splicing genes at TargetA.</reportString>
+  </JobDef>
+  <WorkGiverDef>
+    <defName>AGB_GeneSplice</defName>
+    <label>splice germline samples</label>
+    <giverClass>AnimalGeneticsBreeding.WorkGiver_GeneSplice</giverClass>
+    <workType>Doctor</workType>
+    <verb>splice</verb>
+    <gerund>splicing</gerund>
+    <priorityInType>20</priorityInType>
+    <requiredCapacities>
+      <li>Manipulation</li>
+    </requiredCapacities>
+  </WorkGiverDef>
+
+</Defs>

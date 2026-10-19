@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+  <PawnColumnDef>
+    <defName>AGB_BreedingScore</defName>
+    <workerClass>AnimalGeneticsBreeding.PawnColumnWorker_BreedingScore</workerClass>
+    <sortable>true</sortable>
+    <label>score</label>
+    <headerTip>Breeding score: weighted average of this animal's genes using its species' breeding goal. 0% is average; higher is better.</headerTip>
+  </PawnColumnDef>
+  <PawnColumnDef>
+    <defName>AGB_HerdRole</defName>
+    <workerClass>AnimalGeneticsBreeding.PawnColumnWorker_HerdRole</workerClass>
+    <sortable>true</sortable>
+    <label>role</label>
+    <headerTip>Herd role. Breeder: may breed and is never auto-slaughtered. Keep: never auto-slaughtered. Cull: never breeds, slaughtered first.</headerTip>
+  </PawnColumnDef>
+</Defs>

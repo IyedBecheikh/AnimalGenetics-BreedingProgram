@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ModMetaData>
+  <name>Animal Genetics: Breeding Program</name>
+  <packageId>iyedm.AnimalGeneticsBreeding</packageId>
+  <author>IyedBecheikh</author>
+  <url>https://github.com/IyedBecheikh/AnimalGenetics-BreedingProgram</url>
+  <modVersion>1.0.0</modVersion>
+  <supportedVersions>
+    <li>1.6</li>
+  </supportedVersions>
+  <modDependencies>
+    <li>
+      <packageId>brrainz.harmony</packageId>
+      <displayName>Harmony</displayName>
+      <steamWorkshopUrl>steam://url/CommunityFilePage/2009463077</steamWorkshopUrl>
+      <downloadUrl>https://github.com/pardeike/HarmonyRimWorld/releases/latest</downloadUrl>
+    </li>
+    <li>
+      <packageId>Mlie.AnimalGenetics</packageId>
+      <displayName>Animal Genetics (Continued)</displayName>
+      <steamWorkshopUrl>steam://url/CommunityFilePage/2830943477</steamWorkshopUrl>
+      <downloadUrl>https://github.com/emipa606/AnimalGenetics</downloadUrl>
+    </li>
+  </modDependencies>
+  <loadAfter>
+    <li>brrainz.harmony</li>
+    <li>Mlie.AnimalGenetics</li>
+    <li>OskarPotocki.VanillaFactionsExpanded.Core</li>
+    <li>VanillaExpanded.VGeneticsE</li>
+  </loadAfter>
+  <description>Run a real breeding program on top of Animal Genetics (Continued). Pick who breeds, protect your best lines, cull the worst, bank genes, and tune the next generation.
+
+[b]Herd management[/b]
+- Breeding goals per species (pack animal, meat, milk/wool/eggs, war beast, docile, balanced, or custom weights) turn each animal's genes into one Breeding Score.
+- Herd roles: Breeder, Keep, Cull. Set them from a gizmo, the Animals / Genetics tabs, or the Breeding Program window.
+- Mating control per species: open breeding, breeder males only, or the best N males by score. Cull animals never breed.
+- Gene-aware auto-slaughter: vanilla still decides how many go, this mod decides which. Breeders and Keeps are protected, worst genes go first. Optional: protect the top N per sex, always slaughter Culls, cull adults below a score.
+
+[b]Breeding insight[/b]
+- Pedigree tab: three generations with every ancestor's genes and the inbreeding coefficient.
+- Pairings view: predicted child genes and score for any sire x dam, odds of beating the parents or your best animal, and the best pairs in the herd.
+- Optional inbreeding depression (off by default).
+
+[b]Germline banking[/b] (research: germline banking)
+- Collect germline samples from males, keep them in a powered cryobank, inseminate females later, even after the donor is gone. Works for egg-layers too.
+- Health-tab operations for collecting, inseminating (best matching sample) and giving serums, plus gizmos to pick an exact sample.
+- Storage filters that sort fertilized eggs by gene quality.
+
+[b]Germline tuning[/b] (research: germline tuning)
+- Serums: dominance (one gene always from the better parent), stabilizing (less mutation), mutagenic (more mutation).
+- Gene splice: move one gene from a donor sample into a target sample at the cryobank.
+
+[b]Vanilla Genetics Expanded (optional)[/b]
+- Genomes remember the animal they came from, and hybrids inherit those real genes instead of random ones.
+- Research moves to VGE's genetics tab; the VGE genetics trader buys and sells germline samples and serums.
+
+[b]Performance[/b]
+- Fixes the Genetics / Wildlife / Animals tab lag with many animals (about 3x faster drawing, no constant rebuilds). Works with Numbers and Animal Tab.
+
+Safe to add to an existing save. Requires Harmony and Animal Genetics (Continued).</description>
+</ModMetaData>

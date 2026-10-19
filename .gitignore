@@ -1,0 +1,14 @@
+# Reference material cloned for development (other authors' code) — never published
+_ref/
+
+# Build output
+**/obj/
+**/bin/
+Tests/AGBTest/Assemblies/
+*.pdb
+.vs/
+*.user
+
+# OS / editor
+Thumbs.db
+.DS_Store
