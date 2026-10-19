@@ -83,7 +83,7 @@ public static class BreedingUi
                 continue;
             }
 
-            sb.AppendLine($"  {Constants.GetLabel(stat).CapitalizeFirst()}: {Genes.GetGene(pawn, stat) * 100f:F0}%  ×{weight:0.#}");
+            sb.AppendLine($"  {AgStats.Label(stat).CapitalizeFirst()}: {Genes.GetGene(pawn, stat) * 100f:F0}%  ×{weight:0.#}");
         }
 
         sb.AppendLine();

@@ -83,7 +83,7 @@ public partial class Dialog_BreedingProgram
         {
             DrawRow(inner.x, y, inner.width, cols,
             [
-                Constants.GetLabel(gene.Stat).CapitalizeFirst(), Pct(gene.Father), Pct(gene.Mother), Pct(gene.Mean),
+                AgStats.Label(gene.Stat).CapitalizeFirst(), Pct(gene.Father), Pct(gene.Mother), Pct(gene.Mean),
                 $"{Pct(gene.Low)}–{Pct(gene.High)}"
             ], [null, gene.Father, gene.Mother, gene.Mean, null]);
             y += 22f;

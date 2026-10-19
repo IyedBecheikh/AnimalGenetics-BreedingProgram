@@ -36,10 +36,16 @@ public enum MatingMode
 [StaticConstructorOnStartup]
 public static class Textures
 {
-    public static readonly Texture2D RoleNone = ContentFinder<Texture2D>.Get("UI/AGB/Role_None");
-    public static readonly Texture2D RoleBreeder = ContentFinder<Texture2D>.Get("UI/AGB/Role_Breeder");
-    public static readonly Texture2D RoleKeep = ContentFinder<Texture2D>.Get("UI/AGB/Role_Keep");
-    public static readonly Texture2D RoleCull = ContentFinder<Texture2D>.Get("UI/AGB/Role_Cull");
+    // Loaded on first use, not in a static initializer: another mod Harmony-patching these methods early would
+    // otherwise run the initializer before content is loaded and leave the textures null.
+    public static Texture2D RoleNone => roleNone ??= ContentFinder<Texture2D>.Get("UI/AGB/Role_None");
+    private static Texture2D roleNone;
+    public static Texture2D RoleBreeder => roleBreeder ??= ContentFinder<Texture2D>.Get("UI/AGB/Role_Breeder");
+    private static Texture2D roleBreeder;
+    public static Texture2D RoleKeep => roleKeep ??= ContentFinder<Texture2D>.Get("UI/AGB/Role_Keep");
+    private static Texture2D roleKeep;
+    public static Texture2D RoleCull => roleCull ??= ContentFinder<Texture2D>.Get("UI/AGB/Role_Cull");
+    private static Texture2D roleCull;
 
     public static Texture2D For(HerdRole role)
     {

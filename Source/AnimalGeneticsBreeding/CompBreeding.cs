@@ -171,7 +171,7 @@ public static class BreedingUtility
     {
         var gatherable = global::AnimalGenetics.HarmonyPatches.AnimalGeneticsAssemblyLoader.GatherableTypes
             .Any(t => t != null && def.HasComp(t));
-        return Constants.AffectedStats.Where(s => s != global::AnimalGenetics.AnimalGenetics.GatherYield || gatherable);
+        return AgStats.Affected.Where(s => s != global::AnimalGenetics.AnimalGenetics.GatherYield || gatherable);
     }
 }
 
@@ -199,7 +199,7 @@ public static class BreedingScore
             }
 
             var value = Genes.GetGene(pawn, stat);
-            var deviation = Constants.InvertedStats.Contains(stat) ? 1f - value : value - 1f;
+            var deviation = AgStats.IsInverted(stat) ? 1f - value : value - 1f;
             sum += weight * deviation;
             weightSum += weight;
         }
@@ -221,7 +221,7 @@ public static class BreedingScore
             }
 
             var value = valueOf(stat);
-            sum += weight * (Constants.InvertedStats.Contains(stat) ? 1f - value : value - 1f);
+            sum += weight * (AgStats.IsInverted(stat) ? 1f - value : value - 1f);
             weightSum += weight;
         }
 

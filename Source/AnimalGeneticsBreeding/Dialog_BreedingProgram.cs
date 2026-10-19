@@ -159,7 +159,7 @@ public partial class Dialog_BreedingProgram : Window
         foreach (var stat in BreedingUtility.GenesFor(selected))
         {
             var weight = program.GetWeight(stat);
-            var label = "AGB.WeightLabel".Translate(Constants.GetLabel(stat).CapitalizeFirst(),
+            var label = "AGB.WeightLabel".Translate(AgStats.Label(stat).CapitalizeFirst(),
                 weight <= 0f ? "AGB.Ignored".Translate().Resolve() : "×" + weight.ToString("0"));
             var newWeight = Mathf.Round(listing.SliderLabeled(label, weight, 0f, 5f, 0.55f));
             program.SetWeight(stat, newWeight);

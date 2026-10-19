@@ -53,7 +53,7 @@ public static class OffspringModel
         {
             var a = Value(father, stat);
             var b = Value(mother, stat);
-            var inverted = Constants.InvertedStats.Contains(stat);
+            var inverted = AgStats.IsInverted(stat);
             var mean = (settings.bestGeneChance * Mathf.Max(a, b)) + ((1f - settings.bestGeneChance) * Mathf.Min(a, b)) +
                        (inverted ? -settings.mutationMean : settings.mutationMean);
             return inverted ? Mathf.Min(mean + penalty, 1f) : Mathf.Max(mean - penalty, 0f);
@@ -99,7 +99,7 @@ public static class OffspringModel
                 var stat = stats[i];
                 var a = Value(father, stat);
                 var b = Value(mother, stat);
-                var inverted = Constants.InvertedStats.Contains(stat);
+                var inverted = AgStats.IsInverted(stat);
                 var parent = rng.NextDouble() < settings.bestGeneChance ? Mathf.Max(a, b) : Mathf.Min(a, b);
                 var delta = settings.mutationMean + (Gaussian(rng) * settings.mutationStdDev);
                 if (inverted)

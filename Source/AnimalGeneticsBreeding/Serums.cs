@@ -42,10 +42,10 @@ public class HediffComp_Serum : HediffComp
 
     public SerumKind Kind => ((HediffCompProperties_Serum)props).kind;
 
-    public StatDef Gene => geneDefName == null ? null : Constants.AffectedStats.FirstOrDefault(s => s.defName == geneDefName);
+    public StatDef Gene => geneDefName == null ? null : AgStats.Affected.FirstOrDefault(s => s.defName == geneDefName);
 
     public override string CompLabelInBracketsExtra =>
-        Kind == SerumKind.Dominance && Gene != null ? Constants.GetLabel(Gene) : null;
+        Kind == SerumKind.Dominance && Gene != null ? AgStats.Label(Gene) : null;
 
     public static List<HediffComp_Serum> For(GeneticInformation mother)
     {
@@ -206,7 +206,7 @@ public static class GeneticCalculator_EnsureAllGenesExist
                 continue;
             }
 
-            var inverted = Constants.InvertedStats.Contains(stat);
+            var inverted = AgStats.IsInverted(stat);
             if (__state.Dominant?.Contains(stat.defName) == true && mother?._geneRecords != null &&
                 father?._geneRecords != null && mother._geneRecords.TryGetValue(stat, out var m) &&
                 father._geneRecords.TryGetValue(stat, out var f))

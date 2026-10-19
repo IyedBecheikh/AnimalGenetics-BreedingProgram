@@ -166,7 +166,7 @@ public class CompGermlineSample : ThingComp
             sb.AppendLine();
             sb.Append(string.Join(", ", BreedingUtility.GenesFor(species)
                 .Where(records.ContainsKey)
-                .Select(s => $"{Constants.GetLabel(s)} {records[s].Value * 100f:F0}%")));
+                .Select(s => $"{AgStats.Label(s)} {records[s].Value * 100f:F0}%")));
         }
 
         return sb.ToString();

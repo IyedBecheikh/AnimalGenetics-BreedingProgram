@@ -227,7 +227,7 @@ public class JobDriver_ApplySerum : JobDriver_GermlineBase
             var comp = Animal.Breeding();
             var gene = comp.OrderGene == null
                 ? null
-                : AnimalGenetics.Constants.AffectedStats.FirstOrDefault(s => s.defName == comp.OrderGene);
+                : AgStats.Affected.FirstOrDefault(s => s.defName == comp.OrderGene);
             HediffComp_Serum.Apply(Animal, serum.def, gene);
             Messages.Message("AGB.SerumApplied".Translate(Animal.LabelShort, serum.def.label), Animal,
                 MessageTypeDefOf.PositiveEvent);

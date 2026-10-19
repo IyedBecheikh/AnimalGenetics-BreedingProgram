@@ -350,6 +350,23 @@ public class AGBTestComponent(Game game) : GameComponent
         var kind = DefDatabase<PawnKindDef>.GetNamed("Muffalo");
         var def = kind.race;
 
+        // Another mod patching ours before defs load must not break Animal Genetics (Quality Bionics Remastered did)
+        Check(EarlyPatchSim.Patched > 50 && EarlyPatchSim.FirstFailure == null,
+            $"early-patch simulation patched {EarlyPatchSim.Patched} methods (first failure: {EarlyPatchSim.FirstFailure ?? "none"})");
+        var agOk = true;
+        try
+        {
+            System.Runtime.CompilerServices.RuntimeHelpers.RunClassConstructor(
+                typeof(AnimalGenetics.HarmonyPatches.AnimalGeneticsAssemblyLoader).TypeHandle);
+            agOk = Constants.AffectedStats.Count == 8 && Constants.AffectedStats.All(s => s != null);
+        }
+        catch (Exception)
+        {
+            agOk = false;
+        }
+
+        Check(agOk, "Animal Genetics' Constants and loader initialized after early patching");
+
         // Defs, textures, columns
         Check(DefDatabase<PawnTableDef>.GetNamed("Animals").columns.Any(c => c.defName == "AGB_BreedingScore"),
             "Animals tab has score column");

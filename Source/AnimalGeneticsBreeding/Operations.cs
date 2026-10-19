@@ -112,7 +112,7 @@ public class Recipe_ApplySerum : Recipe_GermlineBase
         }
 
         var geneName = recipe.GetModExtension<SerumGeneExtension>()?.gene;
-        var gene = geneName == null ? null : Constants.AffectedStats.FirstOrDefault(s => s.defName == geneName);
+        var gene = geneName == null ? null : AgStats.Affected.FirstOrDefault(s => s.defName == geneName);
         HediffComp_Serum.Apply(pawn, serum.def, gene);
         Messages.Message("AGB.SerumApplied".Translate(pawn.LabelShort, serum.def.label), pawn, MessageTypeDefOf.PositiveEvent);
     }

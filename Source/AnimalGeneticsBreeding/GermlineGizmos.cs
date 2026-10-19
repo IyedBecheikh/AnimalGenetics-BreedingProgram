@@ -10,8 +10,12 @@ namespace AnimalGeneticsBreeding;
 [StaticConstructorOnStartup]
 public static class GermlineGizmos
 {
-    private static readonly Texture2D CollectIcon = ContentFinder<Texture2D>.Get("UI/AGB/CollectGermline");
-    private static readonly Texture2D InseminateIcon = ContentFinder<Texture2D>.Get("UI/AGB/Inseminate");
+    // Loaded on first use, not in a static initializer: another mod Harmony-patching these methods early would
+    // otherwise run the initializer before content is loaded and leave the textures null.
+    private static Texture2D CollectIcon => collectIcon ??= ContentFinder<Texture2D>.Get("UI/AGB/CollectGermline");
+    private static Texture2D collectIcon;
+    private static Texture2D InseminateIcon => inseminateIcon ??= ContentFinder<Texture2D>.Get("UI/AGB/Inseminate");
+    private static Texture2D inseminateIcon;
 
     public static IEnumerable<Gizmo> For(CompBreeding comp)
     {
@@ -162,7 +166,7 @@ public class Command_ApplySerum : Command
                 foreach (var gene in BreedingUtility.GenesFor(female.def))
                 {
                     options.Add(new FloatMenuOption(
-                        "AGB.SerumOptionGene".Translate(serum.def.LabelCap, AnimalGenetics.Constants.GetLabel(gene)),
+                        "AGB.SerumOptionGene".Translate(serum.def.LabelCap, AgStats.Label(gene)),
                         () => comp.SetOrder(GermlineOrder.ApplySerum, serum, gene.defName)));
                 }
             }

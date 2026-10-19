@@ -230,7 +230,7 @@ public class ITab_Pedigree : ITab
             var row = i % rows;
             var cell = new Rect(inner.x + (col * colW), inner.y + 36f + (row * lineH), colW - 4f, lineH);
             GUI.color = Color.gray;
-            Widgets.Label(cell, Constants.GetLabel(stat).CapitalizeFirst().Truncate(colW * 0.62f));
+            Widgets.Label(cell, AgStats.Label(stat).CapitalizeFirst().Truncate(colW * 0.62f));
             GUI.color = Utilities.TextColor(record.Value);
             var valueText = (record.Value * 100f).ToString("F0") + "%";
             if (isSelf && record.Parent != GeneRecord.Source.None)

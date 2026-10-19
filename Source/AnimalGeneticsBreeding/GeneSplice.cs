@@ -31,7 +31,7 @@ public class CompGeneSplice : ThingComp
 
     public bool Pending => target != null && donor != null && gene != null;
 
-    public StatDef Gene => Constants.AffectedStats.FirstOrDefault(s => s.defName == gene);
+    public StatDef Gene => AgStats.Affected.FirstOrDefault(s => s.defName == gene);
 
     public List<Thing> StoredSamples => parent.Spawned
         ? parent.Position.GetThingList(parent.Map).Where(t => t.def == AGB_DefOf.AGB_GermlineSample).ToList()
@@ -82,7 +82,7 @@ public class CompGeneSplice : ThingComp
         var comp = thing.TryGetComp<CompGermlineSample>();
         comp.genetics = gi;
         comp.species = targetComp.species;
-        comp.donorName = "AGB.SplicedName".Translate(targetComp.donorName, Constants.GetLabel(stat));
+        comp.donorName = "AGB.SplicedName".Translate(targetComp.donorName, AgStats.Label(stat));
         return thing;
     }
 
@@ -112,7 +112,7 @@ public class CompGeneSplice : ThingComp
         {
             defaultLabel = Pending ? "AGB.CommandSpliceCancel".Translate() : "AGB.CommandSplice".Translate(),
             defaultDesc = Pending
-                ? "AGB.CommandSplicePending".Translate(target.LabelShort, donor.LabelShort, Constants.GetLabel(Gene))
+                ? "AGB.CommandSplicePending".Translate(target.LabelShort, donor.LabelShort, AgStats.Label(Gene))
                 : "AGB.CommandSpliceDesc".Translate((TransferFraction * 100f).ToString("F0")),
             icon = ContentFinder<Texture2D>.Get("UI/AGB/GeneSplice"),
             action = () =>
@@ -141,7 +141,7 @@ public class CompGeneSplice : ThingComp
         var text = "AGB.CryobankCount".Translate(count).Resolve();
         if (Pending)
         {
-            text += "\n" + "AGB.SplicePendingShort".Translate(Constants.GetLabel(Gene)).Resolve();
+            text += "\n" + "AGB.SplicePendingShort".Translate(AgStats.Label(Gene)).Resolve();
         }
 
         return text;
@@ -222,7 +222,7 @@ public class Dialog_GeneSplice : Window
 
                 var after = CompGeneSplice.SplicedValue(tv.Value, dv.Value);
                 Text.Anchor = TextAnchor.MiddleLeft;
-                Widgets.Label(row, $"{Constants.GetLabel(stat).CapitalizeFirst()}: {tv.Value * 100f:F0}% → {after * 100f:F0}%");
+                Widgets.Label(row, $"{AgStats.Label(stat).CapitalizeFirst()}: {tv.Value * 100f:F0}% → {after * 100f:F0}%");
                 Text.Anchor = TextAnchor.UpperLeft;
                 if (Widgets.ButtonInvisible(row))
                 {

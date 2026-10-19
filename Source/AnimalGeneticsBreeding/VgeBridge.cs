@@ -81,7 +81,7 @@ public class CompGenomeProfile : ThingComp
         var score = BreedingScore.FromValues(sourceSpecies, s => records.TryGetValue(s, out var r) ? r.Value : 1f);
         return "AGB.GenomeProfile".Translate(sourceName, BreedingScore.Format(score)) + "\n" +
                string.Join(", ", BreedingUtility.GenesFor(sourceSpecies).Where(records.ContainsKey)
-                   .Select(s => $"{Constants.GetLabel(s)} {records[s].Value * 100f:F0}%"));
+                   .Select(s => $"{AgStats.Label(s)} {records[s].Value * 100f:F0}%"));
     }
 
     public override void PostExposeData()
