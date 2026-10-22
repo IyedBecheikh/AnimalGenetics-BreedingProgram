@@ -143,7 +143,10 @@ public partial class Dialog_BreedingProgram : Window
         var view = new Rect(0f, 0f, inner.width - 16f, settingsHeight);
         Widgets.BeginScrollView(inner, ref settingsScroll, view);
         var listing = new Listing_Standard();
-        listing.Begin(view);
+        // Unbounded height: a listing sized from last frame's height would wrap overflow into an off-screen
+        // second column when the content grows (e.g. switching to a species with one more gene) and then report
+        // that column's small height, collapsing the panel.
+        listing.Begin(new Rect(0f, 0f, view.width, 100000f));
 
         // Goal
         Text.Font = GameFont.Medium;

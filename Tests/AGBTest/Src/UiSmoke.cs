@@ -19,6 +19,8 @@ public static class UiSmoke
     private static int nextFrame;
     private static int errorsAtStart;
     public static bool Done;
+    private static bool keepOpen;
+    private static Action<bool, string> checkFn;
 
     private static void CloseAll()
     {
@@ -55,6 +57,34 @@ public static class UiSmoke
         {
             steps.Add(($"program herd tab: {def.defName}", () => Find.WindowStack.Add(new Dialog_BreedingProgram(def))));
             steps.Add(($"program pairings tab: {def.defName}", () => Find.WindowStack.Add(new Dialog_BreedingProgram(def, true))));
+        }
+
+        // Switching to a species whose settings list is taller must not collapse the settings panel.
+        if (species.Count >= 2)
+        {
+            Dialog_BreedingProgram dialog = null;
+            var from = species[0];
+            var to = species[1];
+            var oldMode = BreedingProgram.Get(to).matingMode;
+            steps.Add(("program species switch: open", () =>
+            {
+                dialog = new Dialog_BreedingProgram(from);
+                Find.WindowStack.Add(dialog);
+                keepOpen = true;
+            }));
+            steps.Add(("program species switch: switch", () =>
+            {
+                // Best-males mode adds rows, so the new species' list is taller than the old one.
+                BreedingProgram.GetOrCreate(to).matingMode = MatingMode.BestMales;
+                HarmonyLib.Traverse.Create(dialog).Field("selected").SetValue(to);
+                keepOpen = true;
+            }));
+            steps.Add(("program species switch: check", () =>
+            {
+                var height = HarmonyLib.Traverse.Create(dialog).Field("settingsHeight").GetValue<float>();
+                checkFn(height > 500f, $"settings panel keeps its rows after switching species (height {height:F0})");
+                BreedingProgram.GetOrCreate(to).matingMode = oldMode;
+            }));
         }
 
         foreach (var tab in new[] { "AnimalGenetics", "Animals", "Wildlife" })
@@ -116,7 +146,13 @@ public static class UiSmoke
             ErrorWatch.RecordAll = true;
         }
 
-        CloseAll();
+        checkFn = check;
+        if (!keepOpen)
+        {
+            CloseAll();
+        }
+
+        keepOpen = false;
         index++;
         if (index >= steps.Count)
         {
