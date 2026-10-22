@@ -119,7 +119,7 @@ public static class OffspringModel
                 var w = program.GetWeight(stat);
                 if (w > 0f)
                 {
-                    sum += w * (inverted ? 1f - v : v - 1f);
+                    sum += w * BreedingScore.Deviation(stat, v);
                     weightSum += w;
                 }
             }

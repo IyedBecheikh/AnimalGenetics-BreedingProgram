@@ -52,7 +52,10 @@ public static class Phase45Tests
             return false;
         }
 
-        check(false, "timed out: " + what);
+        var who = doctor ?? handler;
+        check(false, $"timed out: {what} (worker {who?.LabelShort}: job {who?.CurJobDef?.defName ?? "none"}, " +
+                     $"downed {who?.Downed}, mental {who?.MentalStateDef?.defName ?? "none"}, at {who?.Position}, " +
+                     $"bank {bank?.Position} spawned {bank?.Spawned}, target {spliceTarget?.ParentHolder}, donor {spliceDonor?.ParentHolder})");
         Finish();
         return true;
     }
@@ -266,6 +269,7 @@ public static class Phase45Tests
     private static void StartSplice()
     {
         doctor = map.mapPawns.FreeColonistsSpawned.First(c => !c.WorkTypeIsDisabled(WorkTypeDefOf.Doctor));
+        doctor.skills.GetSkill(SkillDefOf.Medicine).Level = 20; // a slow quicktest doctor can miss the timeout
         var cell = CellFinder.RandomClosewalkCellNear(map.Center, map, 10,
             c => c.Standable(map) && c.GetFirstBuilding(map) == null && c.GetFirstItem(map) == null && c.GetFirstPawn(map) == null);
         bank = GenSpawn.Spawn(ThingMaker.MakeThing(AGB_DefOf.AGB_Cryobank), cell, map, WipeMode.Vanish);

@@ -147,6 +147,10 @@ public static class GeneticCalculator_EnsureAllGenesExist
             return;
         }
 
+        // Parents saved before a gene existed (dead ancestors, samples, eggs) lack it; Animal Genetics would throw.
+        EnsureComplete(mother);
+        EnsureComplete(father);
+
         var state = new State();
         if (mother != null && father != null)
         {
@@ -227,6 +231,24 @@ public static class GeneticCalculator_EnsureAllGenesExist
                 record.Value = inverted
                     ? Mathf.Min(record.Value + __state.Penalty, 1f)
                     : Mathf.Max(record.Value - __state.Penalty, 0f);
+            }
+        }
+    }
+
+    private static void EnsureComplete(GeneticInformation genetics)
+    {
+        var records = genetics?._geneRecords;
+        if (records == null)
+        {
+            return;
+        }
+
+        foreach (var stat in AgStats.Affected)
+        {
+            if (!records.ContainsKey(stat))
+            {
+                GeneticCalculator.EnsureAllGenesExist(records, genetics.Mother, genetics.Father);
+                return;
             }
         }
     }

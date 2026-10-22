@@ -22,6 +22,7 @@
   <AGB.Preset_Produce>Milk, wool and eggs</AGB.Preset_Produce>
   <AGB.Preset_WarBeast>War beast</AGB.Preset_WarBeast>
   <AGB.Preset_Docile>Docile</AGB.Preset_Docile>
+  <AGB.Preset_FastGrowth>Fast growth</AGB.Preset_FastGrowth>
   <AGB.Preset_Custom>Custom</AGB.Preset_Custom>
 
   <!-- Score tooltip -->
@@ -169,4 +170,7 @@ Samples stay viable for 3 days unless frozen or kept in a powered cryobank.</AGB
   <AGB.LineageInspect>Carries genome genetics: the hybrid will inherit them.</AGB.LineageInspect>
   <AGB.PedigreeStock>pedigree stock</AGB.PedigreeStock>
   <AGB.SampleValueFactor>Donor genes: x{0}</AGB.SampleValueFactor>
+  <AGB.GrowthSpeed>Growth gene: {0} speed</AGB.GrowthSpeed>
+  <AGB.GrowthTimeExplain>Species: {0} days
+Growth gene: {1} speed</AGB.GrowthTimeExplain>
 </LanguageData>

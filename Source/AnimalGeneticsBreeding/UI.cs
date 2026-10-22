@@ -149,6 +149,47 @@ public class PawnColumnWorker_BreedingScore : PawnColumnWorker
     }
 }
 
+/// <summary>Growth gene column, styled like Animal Genetics' own gene columns.</summary>
+public class PawnColumnWorker_GrowthGene : PawnColumnWorker
+{
+    protected override GameFont DefaultHeaderFont => GameFont.Tiny;
+
+    private static float Gene(Pawn pawn)
+    {
+        var stat = GrowthGene.Stat;
+        return stat == null ? 1f : Genes.GetGene(pawn, stat);
+    }
+
+    public override void DoCell(Rect rect, Pawn pawn, PawnTable table)
+    {
+        if (!Genes.EffectsThing(pawn))
+        {
+            return;
+        }
+
+        var gene = Gene(pawn);
+        GUI.color = Utilities.TextColor(gene);
+        Text.Anchor = TextAnchor.MiddleCenter;
+        Widgets.Label(rect, $"{gene * 100:F0}%");
+        Text.Anchor = TextAnchor.UpperLeft;
+        GUI.color = Color.white;
+        if (Mouse.IsOver(rect))
+        {
+            TooltipHandler.TipRegion(rect, "AGB.GrowthSpeed".Translate(GrowthGene.Speed(gene).ToStringPercent()));
+        }
+    }
+
+    public override int GetMinWidth(PawnTable table)
+    {
+        return 80;
+    }
+
+    public override int Compare(Pawn a, Pawn b)
+    {
+        return Gene(a).CompareTo(Gene(b));
+    }
+}
+
 public class PawnColumnWorker_HerdRole : PawnColumnWorker
 {
     protected override GameFont DefaultHeaderFont => GameFont.Tiny;

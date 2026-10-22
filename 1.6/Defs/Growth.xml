@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+  <!-- The growth gene. Animal Genetics stores genes by StatDef; this one only exists to name the gene. -->
+  <StatDef>
+    <defName>AGB_Growth</defName>
+    <label>Growth</label>
+    <description>Growth gene: how fast this animal matures, and how fast it hatches while still an egg. Above 100% the effect has diminishing returns (150% = x1.36 speed, 200% = x1.68, 300% = x2.28, 433% = x3); below 100% it slows growth one for one.\n\nSpeed is capped at x3 until the growth acceleration research is done.</description>
+    <category>BasicsPawn</category>
+    <defaultBaseValue>1</defaultBaseValue>
+    <toStringStyle>PercentZero</toStringStyle>
+    <alwaysHide>true</alwaysHide>
+  </StatDef>
+
+  <PawnColumnDef>
+    <defName>AGB_GrowthGene</defName>
+    <workerClass>AnimalGeneticsBreeding.PawnColumnWorker_GrowthGene</workerClass>
+    <sortable>true</sortable>
+    <label>Growth</label>
+    <headerTip>Growth gene: how fast young animals mature and fertilized eggs hatch (diminishing returns above 100%; capped at x3 speed until growth acceleration is researched).</headerTip>
+  </PawnColumnDef>
+
+  <ResearchProjectDef>
+    <defName>AGB_GrowthAcceleration</defName>
+    <label>growth acceleration</label>
+    <description>Hormone and metabolic support for fast-growing bloodlines. Lifts the x3 cap on how much the growth gene can speed up maturing and hatching.</description>
+    <baseCost>4000</baseCost>
+    <techLevel>Spacer</techLevel>
+    <tab>AGB_Breeding</tab>
+    <prerequisites>
+      <li>AGB_GermlineTuning</li>
+      <li>MultiAnalyzer</li>
+    </prerequisites>
+    <requiredResearchBuilding>HiTechResearchBench</requiredResearchBuilding>
+    <requiredResearchFacilities>
+      <li>MultiAnalyzer</li>
+    </requiredResearchFacilities>
+    <researchViewX>2</researchViewX>
+    <researchViewY>0</researchViewY>
+  </ResearchProjectDef>
+
+  <RecipeDef ParentName="AGB_GermlineOperationBase">
+    <defName>AGB_Operation_SerumDominance_AGB_Growth</defName>
+    <label>give dominance serum (growth)</label>
+    <description>Her next offspring always inherit the better parent's growth gene.</description>
+    <workerClass>AnimalGeneticsBreeding.Recipe_ApplySerum</workerClass>
+    <researchPrerequisite>AGB_GermlineTuning</researchPrerequisite>
+    <jobString>Giving a breeding serum.</jobString>
+    <workAmount>250</workAmount>
+    <genderPrerequisite>Female</genderPrerequisite>
+    <ingredients>
+      <li>
+        <filter>
+          <thingDefs>
+            <li>AGB_SerumDominance</li>
+          </thingDefs>
+        </filter>
+        <count>1</count>
+      </li>
+    </ingredients>
+    <fixedIngredientFilter>
+      <thingDefs>
+        <li>AGB_SerumDominance</li>
+      </thingDefs>
+    </fixedIngredientFilter>
+    <modExtensions>
+      <li Class="AnimalGeneticsBreeding.SerumGeneExtension">
+        <gene>AGB_Growth</gene>
+      </li>
+    </modExtensions>
+  </RecipeDef>
+
+</Defs>

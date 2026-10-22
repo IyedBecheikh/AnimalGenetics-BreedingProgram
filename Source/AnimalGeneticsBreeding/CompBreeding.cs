@@ -138,6 +138,15 @@ public class CompBreeding : ThingComp
             text += ", " + "AGB.TopMale".Translate();
         }
 
+        if (!pawn.ageTracker.Adult)
+        {
+            var speed = GrowthGene.SpeedOf(pawn);
+            if (speed != 1f)
+            {
+                text += "\n" + "AGB.GrowthSpeed".Translate(speed.ToStringPercent());
+            }
+        }
+
         return text;
     }
 }
@@ -198,9 +207,7 @@ public static class BreedingScore
                 continue;
             }
 
-            var value = Genes.GetGene(pawn, stat);
-            var deviation = AgStats.IsInverted(stat) ? 1f - value : value - 1f;
-            sum += weight * deviation;
+            sum += weight * Deviation(stat, Genes.GetGene(pawn, stat));
             weightSum += weight;
         }
 
@@ -220,12 +227,25 @@ public static class BreedingScore
                 continue;
             }
 
-            var value = valueOf(stat);
-            sum += weight * (AgStats.IsInverted(stat) ? 1f - value : value - 1f);
+            sum += weight * Deviation(stat, valueOf(stat));
             weightSum += weight;
         }
 
         return weightSum > 0f ? sum / weightSum : 0f;
+    }
+
+    /// <summary>
+    ///     How much better than average one gene value is. Most genes count their raw value; the growth gene counts
+    ///     its actual speed-up, which has diminishing returns.
+    /// </summary>
+    public static float Deviation(StatDef stat, float value)
+    {
+        if (AgStats.IsInverted(stat))
+        {
+            return 1f - value;
+        }
+
+        return (stat == GrowthGene.Stat ? GrowthGene.Speed(value) : value) - 1f;
     }
 
     public static string Format(float score)

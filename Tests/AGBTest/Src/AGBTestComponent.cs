@@ -358,7 +358,8 @@ public class AGBTestComponent(Game game) : GameComponent
         {
             System.Runtime.CompilerServices.RuntimeHelpers.RunClassConstructor(
                 typeof(AnimalGenetics.HarmonyPatches.AnimalGeneticsAssemblyLoader).TypeHandle);
-            agOk = Constants.AffectedStats.Count == 8 && Constants.AffectedStats.All(s => s != null);
+            agOk = Constants.AffectedStats.Count == 9 && Constants.AffectedStats.All(s => s != null) &&
+                   Constants.AffectedStats.Contains(GrowthGene.Stat);
         }
         catch (Exception)
         {
@@ -374,6 +375,8 @@ public class AGBTestComponent(Game game) : GameComponent
             "Genetics tab has role column");
         Check(Textures.RoleBreeder != null && Textures.RoleCull != null && Textures.RoleKeep != null &&
               Textures.RoleNone != null, "role textures load");
+
+        GrowthTests.Run(Check, map);
 
         // Clear any existing muffalo so counts are deterministic
         foreach (var p in map.mapPawns.SpawnedColonyAnimals.Where(p => p.def == def).ToList())

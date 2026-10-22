@@ -15,6 +15,7 @@ public static class BreedingMod
     static BreedingMod()
     {
         new Harmony(HarmonyId).PatchAll(Assembly.GetExecutingAssembly());
+        GrowthGene.Register();
     }
 }
 

@@ -184,6 +184,7 @@ All reference files are in `Mods/2801160906/Textures/…`.
    Serums (research "germline tuning", drug lab): dominance (one chosen gene from the better parent), stabilizing (mutation spread x0.25), mutagenic (x3); applied to a female by a handler, used up at her next birth or after 15 days (eggs: genes rolled at laying). Gene splice: cryobank gizmo, doctor job, target gene moves 75% toward the donor's value, donor sample used up.
    Tests: `bash Tests/run-ingame-tests.sh` (no VGE) and `--vge` (loads VEF + VGE, ~70 s).
 6. **Unknown-genes progression mode** (can slot in anywhere after 1). Not started.
+7. **Growth gene** (1.1.0). **Status: built.** Ninth gene `AGB_Growth`, appended to Animal Genetics' `Constants.AffectedStats` at startup so AG and this mod handle it like any gene. Scales the animal maturation step (`Pawn_AgeTracker.CalculateGrowth`) and egg hatch progress (`CompHatcher.CompTick`, by the embryo's gene). Speed = gene^0.75 above 100%, capped x3 until research `AGB_GrowthAcceleration`. Parents saved before the gene existed get it filled in before breeding (`GeneticCalculator_EnsureAllGenesExist.EnsureComplete`). A regression-to-the-mean drag on inheritance was tried and dropped at the user's request.
 
 ---
 

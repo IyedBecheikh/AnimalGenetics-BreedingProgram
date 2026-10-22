@@ -8,8 +8,15 @@ Animal Genetics gives every animal inheritable genes (health, damage, speed, car
 
 ## Features
 
+### Growth gene
+- A new inheritable **Growth** gene, shown alongside Animal Genetics' own genes (Genetics tab column, gene tab, stats, pedigree, pairings, serums, samples, splicing).
+- It speeds up (or slows down) how fast young animals **mature** and how fast fertilized **eggs hatch**. Each animal's info card shows its own growth time, and calves and eggs show their speed in the inspect pane.
+- Diminishing returns above 100%: 150% gene = x1.36 speed, 200% = x1.68, 300% = x2.28, 433% = x3. Below 100% it slows growth one for one (down to x0.25).
+- Speed is **capped at x3** until the late *growth acceleration* research (spacer, needs a hi-tech research bench and multi-analyzer), which lifts the cap. Fast-growth lines shorten every generation, so a true speed breeder takes sustained selection, serums and spacer tech.
+- Breeding scores count the actual speed-up, not the raw gene value. New preset: *Fast growth*.
+
 ### Herd management (available from the start)
-- **Breeding goals per species.** Pick a preset (pack animal, meat & leather, milk/wool/eggs, war beast, docile, balanced) or set your own weight for each gene. Every animal then gets one **Breeding Score**.
+- **Breeding goals per species.** Pick a preset (pack animal, meat & leather, milk/wool/eggs, war beast, docile, fast growth, balanced) or set your own weight for each gene. Every animal then gets one **Breeding Score**.
 - **Herd roles:** *Breeder*, *Keep* and *Cull*. Set them from the animal's button, the Animals tab, the Genetics tab, or the Breeding Program window.
 - **Mating control per species:**
   - open breeding;
@@ -98,7 +105,8 @@ Note: Health-tab operations follow vanilla rules, so the animal must be lying in
 ## Known limitations
 - The Pairings preview and the Inseminate menu don't yet account for an active serum when predicting children.
 - Genomes duplicated with VGE's genome recombinator don't keep their source animal.
-- Removing the mod mid-save drops its items (samples, serums, cryobank) and their data.
+- Removing the mod mid-save drops its items (samples, serums, cryobank) and their data. Removing it from a save that already has Growth genes is untested.
+- Mammal gestation time is not affected by the growth gene (egg hatching is).
 
 ## Building from source
 The C# project is in `Source/AnimalGeneticsBreeding` and targets .NET Framework 4.8. It references the game's managed DLLs, Harmony and Animal Genetics from a RimWorld install. Set your paths with `RimWorldDir` (it defaults to the author's install):

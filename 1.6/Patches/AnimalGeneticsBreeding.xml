@@ -21,6 +21,13 @@
       <li>AGB_HerdRole</li>
     </value>
   </Operation>
+  <!-- Growth gene column in Animal Genetics' gene column list (Genetics tab, and Animals/Wildlife tabs if enabled) -->
+  <Operation Class="PatchOperationAdd">
+    <xpath>/Defs/AnimalGenetics.PawnTableColumnsDef[defName="Genetics"]/columns</xpath>
+    <value>
+      <li>AGB_GrowthGene</li>
+    </value>
+  </Operation>
   <!-- Vanilla Animals tab: next to the slaughter checkbox -->
   <Operation Class="PatchOperationInsert">
     <xpath>/Defs/PawnTableDef[defName="Animals"]/columns/li[text()="Slaughter"]</xpath>
@@ -46,6 +53,7 @@
       <li>AGB_Operation_SerumDominance_LeatherAmount</li>
       <li>AGB_Operation_SerumDominance_Wildness</li>
       <li>AGB_Operation_SerumDominance_GatherYield</li>
+      <li>AGB_Operation_SerumDominance_AGB_Growth</li>
     </value>
   </Operation>
 </Patch>

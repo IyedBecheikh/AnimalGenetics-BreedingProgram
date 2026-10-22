@@ -40,6 +40,20 @@ public static class AgStats
         catch (TypeInitializationException) { return stat?.label ?? stat?.defName ?? "?"; }
     }
 
+    /// <summary>Appends a gene of this mod to Animal Genetics' gene list (and the fallback list).</summary>
+    public static void AddGene(StatDef stat)
+    {
+        var list = Affected;
+        if (!list.Contains(stat))
+        {
+            list.Add(stat);
+        }
+
+        extraGenes.Add(stat);
+    }
+
+    private static readonly List<StatDef> extraGenes = [];
+
     [MethodImpl(MethodImplOptions.NoInlining)]
     private static List<StatDef> ConstantsAffected() => global::AnimalGenetics.Constants.AffectedStats;
 
@@ -49,7 +63,14 @@ public static class AgStats
     [MethodImpl(MethodImplOptions.NoInlining)]
     private static string ConstantsLabel(StatDef stat) => global::AnimalGenetics.Constants.GetLabel(stat);
 
-    private static List<StatDef> BuildFallback() => new()
+    private static List<StatDef> BuildFallback()
+    {
+        var list = BuildAgFallback();
+        list.AddRange(extraGenes);
+        return list;
+    }
+
+    private static List<StatDef> BuildAgFallback() => new()
     {
         global::AnimalGenetics.AnimalGenetics.Health,
         global::AnimalGenetics.AnimalGenetics.Damage,

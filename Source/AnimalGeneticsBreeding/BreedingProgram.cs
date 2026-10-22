@@ -22,18 +22,21 @@ public static class BreedingPresets
         new("Balanced", new Dictionary<string, float>
         {
             { "Health", 1 }, { "Damage", 1 }, { "MoveSpeed", 1 }, { "CarryingCapacity", 1 },
-            { "MeatAmount", 1 }, { "LeatherAmount", 1 }, { "Wildness", 1 }, { "GatherYield", 1 }
+            { "MeatAmount", 1 }, { "LeatherAmount", 1 }, { "Wildness", 1 }, { "GatherYield", 1 },
+            { GrowthGene.DefName, 1 }
         }),
         new("PackAnimal", new Dictionary<string, float>
             { { "CarryingCapacity", 3 }, { "MoveSpeed", 2 }, { "Health", 1 } }),
         new("Meat", new Dictionary<string, float>
-            { { "MeatAmount", 3 }, { "LeatherAmount", 2 }, { "Health", 1 } }),
+            { { "MeatAmount", 3 }, { "LeatherAmount", 2 }, { "Health", 1 }, { GrowthGene.DefName, 1 } }),
         new("Produce", new Dictionary<string, float>
             { { "GatherYield", 3 }, { "MeatAmount", 1 }, { "Health", 1 } }),
         new("WarBeast", new Dictionary<string, float>
             { { "Damage", 3 }, { "Health", 2 }, { "MoveSpeed", 2 } }),
         new("Docile", new Dictionary<string, float>
-            { { "Wildness", 3 }, { "Health", 1 }, { "GatherYield", 1 } })
+            { { "Wildness", 3 }, { "Health", 1 }, { "GatherYield", 1 } }),
+        new("FastGrowth", new Dictionary<string, float>
+            { { GrowthGene.DefName, 3 }, { "Health", 1 }, { "MeatAmount", 1 } })
     ];
 
     public static BreedingPreset Default => All[0];
@@ -75,7 +78,11 @@ public class SpeciesProgram : IExposable
 
         if (Scribe.mode == LoadSaveMode.PostLoadInit)
         {
-            weights ??= new Dictionary<string, float>(BreedingPresets.Default.Weights);
+            // Untouched presets follow the preset, so genes added in later versions get their weight.
+            var preset = BreedingPresets.All.FirstOrDefault(p => p.Key == presetKey);
+            weights = preset != null
+                ? new Dictionary<string, float>(preset.Weights)
+                : weights ?? new Dictionary<string, float>(BreedingPresets.Default.Weights);
         }
     }
 

@@ -29,7 +29,7 @@
 
         <!-- Research lives on VGE's genetics tab and builds on Genetic Alteration -->
         <li Class="PatchOperationReplace">
-          <xpath>/Defs/ResearchProjectDef[defName="AGB_GermlineBanking" or defName="AGB_GermlineTuning"]/tab</xpath>
+          <xpath>/Defs/ResearchProjectDef[defName="AGB_GermlineBanking" or defName="AGB_GermlineTuning" or defName="AGB_GrowthAcceleration"]/tab</xpath>
           <value>
             <tab>GR_GeneticReseach</tab>
           </value>
@@ -56,6 +56,18 @@
           <xpath>/Defs/ResearchProjectDef[defName="AGB_GermlineTuning"]/researchViewX</xpath>
           <value>
             <researchViewX>2</researchViewX>
+          </value>
+        </li>
+        <li Class="PatchOperationReplace">
+          <xpath>/Defs/ResearchProjectDef[defName="AGB_GrowthAcceleration"]/researchViewY</xpath>
+          <value>
+            <researchViewY>3</researchViewY>
+          </value>
+        </li>
+        <li Class="PatchOperationReplace">
+          <xpath>/Defs/ResearchProjectDef[defName="AGB_GrowthAcceleration"]/researchViewX</xpath>
+          <value>
+            <researchViewX>3</researchViewX>
           </value>
         </li>
         <li Class="PatchOperationRemove">
